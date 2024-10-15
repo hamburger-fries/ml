@@ -1,7 +1,85 @@
 ---
-import PageLayout from '@layouts/PageLayout.astro'
+import PageLayout from "@layouts/PageLayout.astro";
+import Gallery from "@components/Gallery.astro";
+
+interface Image {
+  imgUrl: string;
+  alt: string;
+}
+
+const imageFiles: string[] = [
+  "Apple Watch_ip68 copy.jpg",
+  "b&o beach 2a copy.jpg",
+  "b&o blue copy.jpg",
+  "B&O ear copy.jpg",
+  "b&o H2 olive copy.jpg",
+  "b&o H8 v2 copy.jpg",
+  "b&o_A1 copy.jpg",
+  "corningware crab copy.jpg",
+  "Corningware pig copy.jpg",
+  "Danze Kitchen spring ip 3 copy.jpg",
+  "Danze shower head ip 3 copy.jpg",
+  "environment a.jpg",
+  "environment b.jpg",
+  "environment e.jpg",
+  "environment f.jpg",
+  "environment g.jpg",
+  "environment h.jpg",
+  "Feather-Phone copy.jpg",
+  "giro ad-PPP copy.jpg",
+  "giro breathe copy 2.jpg",
+  "giro contrail copy.jpg",
+  "Giro Runway final.jpg",
+  "Giro Space ad copy 2.jpg",
+  "Grohe shower head green copy.jpg",
+  "Grohe showerheads copy 2.jpg",
+  "Honda Shadow final copy.jpg",
+  "Mini ad boxing glove copy.jpg",
+  "Nike blue shoe cu ip2 copy.jpg",
+  "Nike green shoe copy.jpg",
+  "Nike magenta shoe cu copy.jpg",
+  "Nike white shoe copy.jpg",
+  "P van cleef 2 copy.jpg",
+  "P van cleef pea pod copy.jpg",
+  "Ricoh_Theta copy.jpg",
+  "rolo blue copy 2.jpg",
+  "rolo green copy.jpg",
+  "rolo pink copy.jpg",
+  "rolo silver copy 2.jpg",
+  "Samsung skies copy.jpg",
+  "SimonG Fashion 2 ip 5 copy.jpg",
+  "SimonG Set A ip 6 copy.jpg",
+  "SimonG_Engagement_A copy.jpg",
+  "sport left copy.jpg",
+  "stienway ad Sml copy.jpg",
+  "stienway bridge ad Sml copy.jpg",
+  "STUDIO_70682_White_ip12 copy.jpg",
+  "Symantek sample D copy.jpg",
+  "tech 12 copy.jpg",
+  "TECH 13 copy.jpg",
+  "TECH 29 copy.jpg",
+  "tech 37 copy.jpg",
+  "tech 39 copy.jpg",
+  "tech 40 copy.jpg",
+  "TECH 42 copy.jpg",
+  "TECH 50 AA copy.jpg",
+  "TECH 50 B copy.jpg",
+  "TECH 50 copy.jpg",
+  "TECH 51 copy.jpg",
+  "tech 54 copy.jpg",
+  "tech 58 copy.jpg",
+  "Tech 62 copy.jpg",
+  "Tech 63 copy.jpg"
+];
+
+const images: Image[] = imageFiles.map(file => ({
+  imgUrl: `/images/photos/technology/${file}`,
+  alt: file.replace(/\.(jpg|jpeg|png|gif)$/i, '').replace(/\s+copy\s*\d*/i, '').replace(/[-_]/g, ' ')
+}));
 ---
-<PageLayout title='Technology' description='Technology page'>
-  <h1>Technology</h1>
-  <p>This is the Technology page.</p>
+
+<PageLayout title="Technology" description="A gallery of technology photographs">
+  <div class="w-full max-w-screen-xl mx-auto px-4 mt-12">
+    <Gallery images={images} />
+  </div>
 </PageLayout>

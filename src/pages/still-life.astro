@@ -1,7 +1,67 @@
 ---
-import PageLayout from '@layouts/PageLayout.astro'
+import PageLayout from "@layouts/PageLayout.astro";
+import Gallery from "@components/Gallery.astro";
+
+interface Image {
+  imgUrl: string;
+  alt: string;
+}
+
+const imageFiles: string[] = [
+  "ballon molds a copy.jpg",
+  "c copy.jpg",
+  "Coral Tree Flower copy.jpg",
+  "Dahlia 'Snowbound' rear copy.jpg",
+  "Dahlia 'Winsome' copy.jpg",
+  "Dahlia underside copy.jpg",
+  "eph jj copy.jpg",
+  "Ephemera 106 copy.jpg",
+  "Ephemera 672 copy.jpg",
+  "Ephemera 913 copy.jpg",
+  "ephemera 1245 copy.jpg",
+  "Flaming Parrot Tulip copy.jpg",
+  "Green Rounds ip2 copy.jpg",
+  "iron shoe lasts copy.jpg",
+  "Jade Vine ip6 copy.jpg",
+  "New Port image 3 copy.jpg",
+  "New Port image 6 copy 2.jpg",
+  "New Port image 6 copy.jpg",
+  "New Port image 8 copy.jpg",
+  "P aeonium copy.jpg",
+  "P hourglass copy.jpg",
+  "P shell copy.jpg",
+  "page  copy.jpg",
+  "page 08 copy.jpg",
+  "page 16 copy.jpg",
+  "page 17 copy.jpg",
+  "page 18 copy.jpg",
+  "paint dd copy.jpg",
+  "Paint ribbon 3 copy.jpg",
+  "Paint ribbon copy.jpg",
+  "Passiflora Quadrangularis copy.jpg",
+  "Picotee Cosmos 2 copy.jpg",
+  "Pink and White dahlia copy 2.jpg",
+  "post it green copy.jpg",
+  "post it magenta copy.jpg",
+  "pulley copy 2.jpg",
+  "Red Tail Boa Skeleton copy.jpg",
+  "Rooster Cock's Comb copy.jpg",
+  "Still Life 38 copy.jpg",
+  "tech 64 copy.jpg",
+  "tech 65 copy.jpg",
+  "twist orchid copy.jpg",
+  "Vulcan Magnolia copy.jpg",
+  "wrench copy.jpg"
+];
+
+const images: Image[] = imageFiles.map(file => ({
+  imgUrl: `/images/photos/still-life/${file}`,
+  alt: file.replace(/\.(jpg|jpeg|png|gif)$/i, '').replace(/\s+copy\s*\d*/i, '').replace(/[-_]/g, ' ')
+}));
 ---
-<PageLayout title='Still-Life' description='Still-Life page'>
-  <h1>Still-Life</h1>
-  <p>This is the Still-Life page.</p>
+
+<PageLayout title="Still Life" description="A gallery of still life photographs">
+  <div class="w-full max-w-screen-xl mx-auto px-4 mt-12">
+    <Gallery images={images} />
+  </div>
 </PageLayout>

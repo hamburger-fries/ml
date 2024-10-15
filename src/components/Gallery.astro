@@ -1,0 +1,77 @@
+I ended---
+import Picture from "./Picture.astro";
+
+interface Props {
+  images: {
+    imgUrl: string;
+    alt: string;
+  }[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="w-full px-4 mt-8 columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-3">
+  {images.map((image) => (
+    <div class="mb-3 break-inside-avoid">
+      <Picture
+        imgUrl={image.imgUrl}
+        alt={image.alt}
+        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+        class="w-full aspect-auto rounded-lg cursor-pointer gallery-image"
+      />
+    </div>
+  ))}
+</div>
+
+<div id="imageModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 hidden opacity-0 transition-opacity duration-300 ease-in-out">
+  <div class="relative max-w-[90vw] max-h-[90vh]">
+    <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain" />
+    <button id="closeModal" class="absolute top-4 right-4 text-white text-2xl font-bold">&times;</button>
+  </div>
+</div>
+
+<script>
+  function setupGallery() {
+    const images = document.querySelectorAll('.gallery-image');
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage') as HTMLImageElement | null;
+    const closeButton = document.getElementById('closeModal');
+
+    function openModal() {
+      modal?.classList.remove('hidden');
+      setTimeout(() => modal?.classList.remove('opacity-0'), 10);
+    }
+
+    function closeModal() {
+      modal?.classList.add('opacity-0');
+      setTimeout(() => modal?.classList.add('hidden'), 300);
+    }
+
+    images.forEach((img) => {
+      img.addEventListener('click', () => {
+        if (img instanceof HTMLImageElement && modalImage) {
+          modalImage.src = img.src;
+          modalImage.alt = img.alt;
+          openModal();
+        }
+      });
+    });
+
+    modal?.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    closeButton?.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupGallery);
+</script>
