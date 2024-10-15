@@ -1,0 +1,81 @@
+---
+import { SITE, LINKS } from "@consts"
+import { cn } from "@lib/utils"
+const { pathname } = Astro.url
+const subpath = pathname.match(/[^/]+/g)
+import Container from "@components/Container.astro"
+---
+
+<header id="header" class="fixed top-0 w-full z-50 bg-white dark:bg-black">
+  <Container size="xl">
+    <div class="relative py-4">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2 text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
+          <svg class="w-6 h-6 fill-current">
+            <use href="/brand.svg#brand"></use>
+          </svg>
+          <span class="font-semibold text-lg">
+            <span class="text-black dark:text-white">Mike</span><span class="text-gray-500 dark:text-gray-400">Laita</span>
+          </span>
+        </a>
+
+        <nav class="hidden lg:flex items-center justify-between gap-4 text-sm">
+          {
+            LINKS.map((LINK) => (
+              <a href={LINK.HREF} class={cn("px-3 py-2 rounded-md text-current", "transition-colors duration-300 ease-in-out", pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "bg-black dark:bg-white text-white dark:text-black" : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white")}>
+                {LINK.TEXT}
+              </a>
+            ))
+          }
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <button id="header-theme-button" aria-label="Toggle light and dark theme" class={cn("hidden md:flex", "w-10 h-10 rounded-full p-2 items-center justify-center", "bg-transparent hover:bg-black/5 dark:hover:bg-white/20", "stroke-current hover:stroke-black hover:dark:stroke-white", "border border-black/10 dark:border-white/25", "transition-colors duration-300 ease-in-out")}>
+            <svg class="w-full h-full block dark:hidden">
+              <use href="/ui.svg#sun"></use>
+            </svg>
+            <svg class="w-full h-full hidden dark:block">
+              <use href="/ui.svg#moon"></use>
+            </svg>
+          </button>
+
+          <button id="header-drawer-button" aria-label="Toggle drawer open and closed" class={cn("lg:hidden", "w-10 h-10 rounded-full p-2 items-center justify-center", "bg-transparent hover:bg-black/5 dark:hover:bg-white/20", "stroke-current hover:stroke-black hover:dark:stroke-white", "border border-black/10 dark:border-white/25", "transition-colors duration-300 ease-in-out")}>
+            <svg id="drawer-open" class="w-full h-full">
+              <use href="/ui.svg#menu"></use>
+            </svg>
+            <svg id="drawer-close" class="w-full h-full hidden">
+              <use href="/ui.svg#x"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </Container>
+</header>
+
+<style>
+  #header-drawer-button.open #drawer-open {
+    @apply hidden;
+  }
+
+  #header-drawer-button.open #drawer-close {
+    @apply block;
+  }
+</style>
+
+<script is:inline>
+  function toggleDrawer() {
+    const drawer = document.getElementById("drawer")
+    const drawerButton = document.getElementById("header-drawer-button")
+    drawer?.classList.toggle("open")
+    drawerButton?.classList.toggle("open")
+  }
+
+  function initializeDrawerButton() {
+    const drawerButton = document.getElementById("header-drawer-button")
+    drawerButton?.addEventListener("click", toggleDrawer)
+  }
+
+  document.addEventListener("astro:after-swap", initializeDrawerButton)
+  initializeDrawerButton()
+</script>
