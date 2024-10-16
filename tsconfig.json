@@ -10,7 +10,7 @@
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "types": ["react", "react-dom"],
+    "types": ["react", "react-dom", "react/jsx-runtime"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
   },

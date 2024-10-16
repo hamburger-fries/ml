@@ -60,7 +60,7 @@ export default function Blog({ data, tags }: Props) {
             SHOWING {posts.length} OF {data.length} POSTS
           </div>
           <ul className="flex flex-col gap-3">
-            {posts.map((post) => (
+            {posts.map((post: CollectionEntry<"blog">) => (
               <li key={post.id}>
                 <ArrowCard entry={post} />
               </li>
