@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/PageLayout.astro';
+import FrontPageHeroImages from '../components/FrontPageHeroImages.astro';
+---
+
+<Layout title="Demo Page">
+  <main class="container mx-auto px-4 relative">
+    <div class="h-10"></div> <!-- This creates a 40px space at the top -->
+    <FrontPageHeroImages />
+    <div class="mt-8">
+      <h1 class="text-3xl font-bold mb-6">Demo Page</h1>
+      <p>This is a static demo page without any client-side components.</p>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  console.log('Demo page script executed');
+</script>

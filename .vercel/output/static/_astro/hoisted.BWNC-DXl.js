@@ -1,0 +1,1 @@
+const t=document.getElementById("mobile-menu-toggle"),o=document.getElementById("mobile-menu");t?.addEventListener("click",()=>{o?.classList.toggle("hidden")});document.addEventListener("astro:before-swap",e=>[...e.newDocument.head.querySelectorAll('link[as="font"]')].forEach(n=>n.remove()));

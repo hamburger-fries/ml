@@ -13,38 +13,59 @@ const imageLinks: ImageLinkProps[] = [
   { href: "/people", src: "/front-component/people.jpg", alt: "People" },
   { href: "/still-life", src: "/front-component/still-life.jpg", alt: "Still Life" },
   { href: "/technology", src: "/front-component/technology.jpg", alt: "Technology" },
+  { href: "/animals", src: "/front-component/animals2.jpg", alt: "Animals 2" },
 ];
 
-// Ensure exactly 3 images on top and 4 images on bottom
-const topImages = imageLinks.slice(0, 3);
-const bottomImages = imageLinks.slice(3, 7);
+const topImages = imageLinks.slice(0, 4);
+const bottomImages = imageLinks.slice(4);
 ---
 
-<div class="max-w-6xl mx-auto p-4">
-  <!-- Top row with 3 images -->
-  <div class="flex justify-center gap-4 mb-4">
-    {topImages.map((image) => (
-      <div class="w-[300px] h-[300px] overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105 relative group">
-        <a href={image.href} class="block w-full h-full">
-          <img src={image.src} alt={image.alt} class="w-full h-full object-cover" loading="lazy" />
-          <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-opacity flex items-center justify-center">
-            <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition-opacity">{image.alt}</span>
-          </div>
-        </a>
-      </div>
-    ))}
-  </div>
-  <!-- Bottom row with 4 images -->
-  <div class="flex justify-center gap-4">
-    {bottomImages.map((image) => (
-      <div class="w-[300px] h-[300px] overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105 relative group">
-        <a href={image.href} class="block w-full h-full">
-          <img src={image.src} alt={image.alt} class="w-full h-full object-cover" loading="lazy" />
-          <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-opacity flex items-center justify-center">
-            <span class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition-opacity">{image.alt}</span>
-          </div>
-        </a>
-      </div>
-    ))}
+<div class="max-w-[1090px] mx-auto px-4">
+  <div class="flex flex-col gap-[10px]">
+    <!-- Top row: 4 images -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-[10px]">
+      {topImages.map((image) => (
+        <div class="aspect-square overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105 relative group">
+          <a href={image.href} class="block w-full h-full">
+            <img
+              src={image.src}
+              alt={image.alt}
+              class="w-full h-full object-cover"
+              width="265"
+              height="265"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-opacity flex items-center justify-center">
+              <span class="text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+                {image.alt}
+              </span>
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom row: 4 images -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-[10px]">
+      {bottomImages.map((image) => (
+        <div class="aspect-square overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105 relative group">
+          <a href={image.href} class="block w-full h-full">
+            <img
+              src={image.src}
+              alt={image.alt}
+              class="w-full h-full object-cover"
+              width="265"
+              height="265"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-opacity flex items-center justify-center">
+              <span class="text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+                {image.alt}
+              </span>
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
   </div>
 </div>

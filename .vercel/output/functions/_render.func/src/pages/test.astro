@@ -1,0 +1,24 @@
+---
+import PageLayout from "@layouts/PageLayout.astro"
+import { SITE } from "@consts"
+import HomeImageGrid from "@components/HomeImageGrid.astro"
+import CurvedAreaWithDots from "@components/CurvedAreaWithDots.astro"
+import Header from "@components/Header.astro"
+---
+
+<PageLayout title={SITE.TITLE} description={SITE.DESCRIPTION}>
+  <Header />
+  <main class="w-full pt-16"> <!-- Added pt-16 to account for the fixed header -->
+    <div class="relative">
+      <CurvedAreaWithDots />
+      <div class="absolute inset-0 flex items-center justify-center">
+        <h1 class="text-4xl font-bold text-gray-800 z-10">Welcome to {SITE.TITLE}</h1>
+      </div>
+    </div>
+    <div class="bg-gray-200 py-12">
+      <div class="container mx-auto px-4">
+        <HomeImageGrid />
+      </div>
+    </div>
+  </main>
+</PageLayout>

@@ -10,10 +10,10 @@ const subpath = pathname.match(/[^/]+/g)
 
 <header id="header" class="fixed top-0 w-full z-50 bg-white dark:bg-black">
   <Container size="xl">
-    <div class="relative py-4">
+    <div class="relative py-2 sm:py-4">
       <div class="flex items-center justify-between">
         <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity duration-300 ease-in-out">
-          <img src="/images/logo.png" alt="Mark Lata Logo" class="h-8 w-auto" />
+          <img src="/images/logo.png" alt="Mark Lata Logo" class="h-6 w-auto sm:h-8" />
         </a>
 
         <nav class="hidden lg:flex items-center justify-between gap-4 text-base">
@@ -26,15 +26,45 @@ const subpath = pathname.match(/[^/]+/g)
           }
         </nav>
 
-        <button id="header-theme-button" aria-label="Toggle light and dark theme" class={cn("hidden md:flex", "w-10 h-10 rounded-full p-2 items-center justify-center", "bg-transparent hover:bg-black/5 dark:hover:bg-white/20", "stroke-current hover:stroke-black hover:dark:stroke-white", "border border-black/10 dark:border-white/25", "transition-colors duration-300 ease-in-out")}>
-          <svg class="w-full h-full block dark:hidden">
-            <use href="/ui.svg#sun"></use>
-          </svg>
-          <svg class="w-full h-full hidden dark:block">
-            <use href="/ui.svg#moon"></use>
-          </svg>
-        </button>
+        <div class="flex items-center gap-2">
+          <button id="header-theme-button" aria-label="Toggle light and dark theme" class={cn("flex", "w-8 h-8 sm:w-10 sm:h-10 rounded-full p-2 items-center justify-center", "bg-transparent hover:bg-black/5 dark:hover:bg-white/20", "stroke-current hover:stroke-black hover:dark:stroke-white", "border border-black/10 dark:border-white/25", "transition-colors duration-300 ease-in-out")}>
+            <svg class="w-full h-full block dark:hidden">
+              <use href="/ui.svg#sun"></use>
+            </svg>
+            <svg class="w-full h-full hidden dark:block">
+              <use href="/ui.svg#moon"></use>
+            </svg>
+          </button>
+
+          <button id="mobile-menu-toggle" class="lg:hidden flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-black border-t border-black/10 dark:border-white/25">
+        <nav class="flex flex-col py-2">
+          {
+            LINKS.map((LINK) => (
+              <a href={LINK.HREF} class={cn("px-4 py-2 text-current", "transition-colors duration-300 ease-in-out", pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "bg-black dark:bg-white text-white dark:text-black" : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white")}>
+                {LINK.TEXT}
+              </a>
+            ))
+          }
+        </nav>
       </div>
     </div>
   </Container>
 </header>
+
+<script>
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>
