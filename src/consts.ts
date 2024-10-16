@@ -1,28 +1,10 @@
-import type { Site, Page, Links, Socials } from "@types"
+import type { Site, Links, Socials } from "@types"
 
 // Global
 export const SITE: Site = {
-  TITLE: "MikeLaita",
-  DESCRIPTION: "Welcome to MikeLaita, a portfolio and blog for designers and developers.",
-  AUTHOR: "Mike Laita",
-}
-
-// Work Page
-export const WORK: Page = {
-  TITLE: "Work",
-  DESCRIPTION: "Places I have worked.",
-}
-
-// Blog Page
-export const BLOG: Page = {
-  TITLE: "Blog",
-  DESCRIPTION: "Writing on topics I am passionate about.",
-}
-
-// Search Page
-export const SEARCH: Page = {
-  TITLE: "Search",
-  DESCRIPTION: "Search all posts and projects by keyword.",
+  TITLE: "MarkLaita",
+  DESCRIPTION: "Welcome to MarkLaita, a portfolio and blog for designers and developers.",
+  AUTHOR: "Mark Laita",
 }
 
 // Links
@@ -55,10 +37,6 @@ export const LINKS: Links = [
     TEXT: "Technology",
     HREF: "/technology",
   },
-  {
-    TEXT: "Contact",
-    HREF: "/contact",
-  },
 ]
 
 // Socials
@@ -66,25 +44,19 @@ export const SOCIALS: Socials = [
   { 
     NAME: "Email",
     ICON: "email", 
-    TEXT: "mike.laita@example.com",
-    HREF: "mailto:mike.laita@example.com",
+    TEXT: "info@softwhiteunderbelly.com",
+    HREF: "mailto:info@softwhiteunderbelly.com",
   },
   { 
-    NAME: "Github",
-    ICON: "github",
-    TEXT: "mikelaita",
-    HREF: "https://github.com/mikelaita"
-  },
-  { 
-    NAME: "LinkedIn",
-    ICON: "linkedin",
-    TEXT: "mikelaita",
-    HREF: "https://www.linkedin.com/in/mikelaita/",
+    NAME: "Instagram",
+    ICON: "instagram",
+    TEXT: "Mark Laita",
+    HREF: "https://www.instagram.com/mark_laita/",
   },
   { 
     NAME: "Twitter",
     ICON: "twitter-x",
-    TEXT: "mikelaita",
-    HREF: "https://twitter.com/mikelaita",
+    TEXT: "mark_laita",
+    HREF: "https://x.com/mark_laita",
   },
 ]
