@@ -29,7 +29,7 @@ It is primarily Astro, Tailwind and Typescript, with a very small amount of Soli
 ![Astro Sphere Lighthouse Score](_lighthouse.png)
 
 ## 🕊️ Lightweight
-All pages under 100kb (including fonts)
+All pages under 100kb (including fonts) -
 
 ## ⚡︎ Fast
 Rendered in ~40ms on localhost
