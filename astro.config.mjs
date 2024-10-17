@@ -13,4 +13,12 @@ export default defineConfig({
     react()
   ],
   output: "static",
+  build: {
+    inlineStylesheets: "auto"
+  },
+  vite: {
+    build: {
+      minify: false // Disable minification
+    }
+  }
 });

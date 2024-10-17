@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import '../styles/FrontPageHeroImages.css';
+
 interface ImageLinkProps {
   href: string;
   src: string;
@@ -20,18 +23,18 @@ const imageLinks: ImageLinkProps[] = [
 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
   <div class="image-grid">
     {imageLinks.map((image) => (
-      <div class="aspect-square overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105 relative group">
-        <a href={image.href} class="block w-full h-full">
-          <img
+      <div class="image-item">
+        <a href={image.href} class="block w-full h-full" aria-label={`View ${image.alt} category`}>
+          <Image
             src={image.src}
             alt={image.alt}
+            width={265}
+            height={265}
             class="w-full h-full object-cover"
-            width="265"
-            height="265"
             loading="lazy"
           />
-          <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-opacity flex items-center justify-center">
-            <span class="text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+          <div class="image-overlay">
+            <span class="image-label">
               {image.alt}
             </span>
           </div>

@@ -13,12 +13,21 @@ import { SITE } from "@consts"
   <head>
     <BaseHead title={`${title} | ${SITE.TITLE}`} description={description} />
   </head>
-  <body>
+  <body class="flex flex-col min-h-screen">
     <Header />
     <Drawer />
-    <main>
+    <main class="flex-grow">
       <slot />
     </main>
     <Footer />
+    <script>
+      // Apply the saved theme on initial page load
+      const savedTheme = localStorage.getItem('theme');
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const theme = savedTheme || systemTheme;
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
   </body>
 </html>
