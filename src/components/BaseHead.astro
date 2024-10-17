@@ -1,13 +1,13 @@
 ---
 interface Props {
-  title: string
-  description: string
-  image?: string
+  title: string;
+  description: string;
+  image?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/open-graph.jpg" } = Astro.props
+const { title, description, image = "/open-graph.jpg" } = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -17,11 +17,23 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 <meta name="generator" content={Astro.generator} />
 
 <!-- Preconnect to external domains -->
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
 <!-- Preload fonts -->
-<link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin>
+<link
+  rel="preload"
+  href="/fonts/atkinson-regular.woff"
+  as="font"
+  type="font/woff"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/atkinson-bold.woff"
+  as="font"
+  type="font/woff"
+  crossorigin
+/>
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -48,11 +60,16 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
 
-<!-- RSS Feed -->
-<link rel="alternate" type="application/rss+xml" title={title} href={`${Astro.site}rss.xml`}/>
+<!-- RSS-Feed -->
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={title}
+  href={`${Astro.site}rss.xml`}
+/>
 
 <!-- Web App Manifest -->
-<link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="/manifest.json" />
 
 <!-- Structured Data -->
 <script type="application/ld+json">
@@ -70,29 +87,29 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
   // Inline critical JavaScript here
   // Theme switcher
   const theme = (() => {
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-      return localStorage.getItem('theme');
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
     }
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
     }
-    return 'light';
+    return "light";
   })();
-  if (theme === 'light') {
-    document.documentElement.classList.remove('dark');
+  if (theme === "light") {
+    document.documentElement.classList.remove("dark");
   } else {
-    document.documentElement.classList.add('dark');
+    document.documentElement.classList.add("dark");
   }
-  window.localStorage.setItem('theme', theme);
+  window.localStorage.setItem("theme", theme);
 </script>
 
 <script>
-  import type { TransitionBeforeSwapEvent } from "astro:transitions/client"
+  import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
   document.addEventListener("astro:before-swap", (e) =>
     [
       ...(e as TransitionBeforeSwapEvent).newDocument.head.querySelectorAll(
-        "link[as=\"font\"]"
+        'link[as="font"]'
       ),
     ].forEach((link) => link.remove())
-  )
+  );
 </script>
