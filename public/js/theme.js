@@ -23,7 +23,8 @@ function changeTheme() {
     element.classList.remove("dark")
   }
 
-  window.getComputedStyle(css).opacity
+  // Force a reflow
+  void window.getComputedStyle(css).opacity
   document.head.removeChild(css)
   localStorage.theme = theme
 }

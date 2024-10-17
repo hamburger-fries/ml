@@ -56,7 +56,7 @@ Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, e
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 | `npm run lint`            | Run ESLint                                       |
-| `npm run lint:fix`        | Auto-fix ESLint issues                           |
+| ``        | Auto-fix ESLint issues                           |
 
 ## 🗺️ Roadmap
 
@@ -80,7 +80,7 @@ MIT
 Added ability to run dev and preview on local network.
 added npm run dev:network
 added npm run preview:network
-
+npm run lint:fix
 Added slightly more particle density in both light and dark mode.
 
 Added subtle dark mode star and meteor animations.

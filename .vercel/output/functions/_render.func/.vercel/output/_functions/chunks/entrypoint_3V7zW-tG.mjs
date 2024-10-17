@@ -3102,7 +3102,7 @@ function makeAbsolute(cwd, filepath) {
 path$9.makeAbsolute = makeAbsolute;
 function removeLeadingDotSegment(entry) {
     // We do not use `startsWith` because this is 10x slower than current implementation for some cases.
-    // eslint-disable-next-line @typescript-eslint/prefer-string-starts-ends-with
+     
     if (entry.charAt(0) === '.') {
         const secondCharactery = entry.charAt(1);
         if (secondCharactery === '/' || secondCharactery === '\\') {
@@ -5445,7 +5445,7 @@ const expandRange = (args, options) => {
   const value = `[${args.join('-')}]`;
 
   try {
-    /* eslint-disable-next-line no-new */
+     
     new RegExp(value);
   } catch (ex) {
     return args.map(v => utils$d.escapeRegex(v)).join('..');
@@ -8353,7 +8353,7 @@ function reusify$1 (Constructor) {
 
 var reusify_1 = reusify$1;
 
-/* eslint-disable no-var */
+ 
 
 var reusify = reusify_1;
 
@@ -9653,7 +9653,7 @@ async function FastGlob(source, options) {
     return utils.array.flatten(result);
 }
 // https://github.com/typescript-eslint/typescript-eslint/issues/60
-// eslint-disable-next-line no-redeclare
+ 
 (function (FastGlob) {
     FastGlob.glob = FastGlob;
     FastGlob.globSync = sync;

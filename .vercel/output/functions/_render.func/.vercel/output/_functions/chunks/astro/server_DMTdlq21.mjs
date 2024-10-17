@@ -93,7 +93,7 @@ function init(x, y) {
 
 	return function (txt) {
 		if (!$.enabled || txt == null) return txt;
-		return open + (!!~(''+txt).indexOf(close) ? txt.replace(rgx, close + open) : txt) + close;
+		return open + (~(''+txt).indexOf(close) ? txt.replace(rgx, close + open) : txt) + close;
 	};
 }
 const bold = init(1, 22);
@@ -1948,7 +1948,7 @@ ${serializeProps(
   if (html) {
     if (Object.keys(children).length > 0) {
       for (const key of Object.keys(children)) {
-        let tagName = renderer?.ssr?.supportsAstroStaticSlot ? !!metadata.hydrate ? "astro-slot" : "astro-static-slot" : "astro-slot";
+        let tagName = renderer?.ssr?.supportsAstroStaticSlot ? metadata.hydrate ? "astro-slot" : "astro-static-slot" : "astro-slot";
         let expectedHTML = key === "default" ? `<${tagName}>` : `<${tagName} name="${key}">`;
         if (!html.includes(expectedHTML)) {
           unrenderedSlots.push(key);
