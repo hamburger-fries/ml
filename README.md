@@ -72,7 +72,7 @@ Theme inspired by [Paco Coursey](https://paco.me/), [Lee Robinson](https://leero
 
 ## 🏛️ License
 
-MIT
+MIT 
 
 
 # 1.0.1 Update
