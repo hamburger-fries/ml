@@ -63,7 +63,7 @@ Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, e
 A few features I plan to implement
 - ⬜ Code Blocks - copy to clipboard
 - ⬜ Article Pages - Table of Contents
-- ⬜ Article Pages - Share on social media --
+- ⬜ Article Pages - Share on social media ---
 
 ## ✨ Acknowledgement
 
