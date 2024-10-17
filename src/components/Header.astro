@@ -17,7 +17,7 @@ const subpath = pathname.match(/[^/]+/g)
           <img src="/images/logo-dark.png" alt="Mark Lata Logo" class="h-6 w-auto sm:h-8 hidden dark:block" />
         </a>
 
-        <nav class="hidden lg:flex items-center justify-between gap-4 text-base">
+        <nav class="hidden md:flex items-center justify-between gap-4 text-base">
           {
             LINKS.map((LINK) => (
               <a href={LINK.HREF} class={cn("px-3 py-2 rounded-md text-current", "transition-colors duration-300 ease-in-out", pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "bg-black dark:bg-white text-white dark:text-black" : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white")}>
@@ -37,7 +37,7 @@ const subpath = pathname.match(/[^/]+/g)
             </svg>
           </button>
 
-          <button id="mobile-menu-toggle" class="lg:hidden flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10">
+          <button id="mobile-menu-toggle" class="md:hidden flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
@@ -46,11 +46,11 @@ const subpath = pathname.match(/[^/]+/g)
       </div>
 
       <!-- Mobile Menu -->
-      <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-black border-t border-black/10 dark:border-white/25">
-        <nav class="flex flex-col py-2">
+      <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white dark:bg-black border-t border-black/10 dark:border-white/25">
+        <nav class="flex flex-wrap justify-center py-2">
           {
             LINKS.map((LINK) => (
-              <a href={LINK.HREF} class={cn("px-4 py-2 text-current", "transition-colors duration-300 ease-in-out", pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "bg-black dark:bg-white text-white dark:text-black" : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white")}>
+              <a href={LINK.HREF} class={cn("px-3 py-2 text-current", "transition-colors duration-300 ease-in-out", pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "bg-black dark:bg-white text-white dark:text-black" : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white")}>
                 {LINK.TEXT}
               </a>
             ))

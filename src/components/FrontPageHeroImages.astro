@@ -7,81 +7,36 @@ interface ImageLinkProps {
 
 const imageLinks: ImageLinkProps[] = [
   { href: "/animals", src: "/front-component/animals.jpg", alt: "Animals" },
-  {
-    href: "/cosmetics",
-    src: "/front-component/cosmetics.jpg",
-    alt: "Cosmetics",
-  },
+  { href: "/cosmetics", src: "/front-component/cosmetics.jpg", alt: "Cosmetics" },
   { href: "/drinks", src: "/front-component/drinks.jpg", alt: "Drinks" },
   { href: "/food", src: "/front-component/food.jpg", alt: "Food" },
   { href: "/people", src: "/front-component/people.jpg", alt: "People" },
-  {
-    href: "/still-life",
-    src: "/front-component/still-life.jpg",
-    alt: "Still Life",
-  },
-  {
-    href: "/technology",
-    src: "/front-component/technology.jpg",
-    alt: "Technology",
-  },
+  { href: "/still-life", src: "/front-component/still-life.jpg", alt: "Still Life" },
+  { href: "/technology", src: "/front-component/technology.jpg", alt: "Technology" },
   { href: "/animals", src: "/front-component/animals2.jpg", alt: "Animals" },
 ];
-
-const topImages = imageLinks.slice(0, 4);
-const bottomImages = imageLinks.slice(4);
 ---
 
-<div class="max-w-[1090px] mx-auto px-4">
-  <div class="flex flex-col gap-[10px]">
-    <!-- Top row: 4 images -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-[10px]">
-      {
-        topImages.map((image) => (
-          <div class="aspect-square overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105 relative group">
-            <a href={image.href} class="block w-full h-full">
-              <img
-                src={image.src}
-                alt={image.alt}
-                class="w-full h-full object-cover"
-                width="265"
-                height="265"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-opacity flex items-center justify-center">
-                <span class="text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-                  {image.alt}
-                </span>
-              </div>
-            </a>
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="image-grid">
+    {imageLinks.map((image) => (
+      <div class="aspect-square overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105 relative group">
+        <a href={image.href} class="block w-full h-full">
+          <img
+            src={image.src}
+            alt={image.alt}
+            class="w-full h-full object-cover"
+            width="265"
+            height="265"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-opacity flex items-center justify-center">
+            <span class="text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+              {image.alt}
+            </span>
           </div>
-        ))
-      }
-    </div>
-
-    <!-- Bottom row: 4 images -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-[10px]">
-      {
-        bottomImages.map((image) => (
-          <div class="aspect-square overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105 relative group">
-            <a href={image.href} class="block w-full h-full">
-              <img
-                src={image.src}
-                alt={image.alt}
-                class="w-full h-full object-cover"
-                width="265"
-                height="265"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-opacity flex items-center justify-center">
-                <span class="text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-                  {image.alt}
-                </span>
-              </div>
-            </a>
-          </div>
-        ))
-      }
-    </div>
+        </a>
+      </div>
+    ))}
   </div>
 </div>
