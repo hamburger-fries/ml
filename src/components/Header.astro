@@ -61,41 +61,45 @@ const subpath = pathname.match(/[^/]+/g)
 </header>
 
 <script>
-  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
+  function setupThemeToggle() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-  mobileMenuToggle?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
-  });
+    mobileMenuToggle?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('hidden');
+    });
 
-  // Dark mode toggle functionality
-  const themeToggleButton = document.getElementById('header-theme-button');
-  
-  function setTheme(theme: 'light' | 'dark') {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
+    // Dark mode toggle functionality
+    const themeToggleButton = document.getElementById('header-theme-button');
+    
+    function setTheme(theme: 'light' | 'dark') {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
     }
+
+    // Check for saved theme preference or use light as default
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    setTheme(savedTheme || 'light');
+
+    // Toggle theme when button is clicked
+    themeToggleButton?.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(isDark ? 'light' : 'dark');
+    });
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        setTheme('light');
+      }
+    });
   }
 
-  // Check for saved theme preference or use system preference
-  const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  setTheme(savedTheme || systemTheme);
-
-  // Toggle theme when button is clicked
-  themeToggleButton?.addEventListener('click', () => {
-    const isDark = document.documentElement.classList.contains('dark');
-    setTheme(isDark ? 'light' : 'dark');
-  });
-
-  // Listen for system theme changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
-      setTheme(e.matches ? 'dark' : 'light');
-    }
-  });
+  // Run the setup function when the DOM is ready
+  document.addEventListener('DOMContentLoaded', setupThemeToggle);
 </script>
