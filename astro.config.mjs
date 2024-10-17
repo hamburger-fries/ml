@@ -4,8 +4,6 @@ import sitemap from "@astrojs/sitemap"
 import tailwind from "@astrojs/tailwind"
 import react from "@astrojs/react"
 
-import vercel from "@astrojs/vercel/serverless";
-
 // https://astro.build/config
 export default defineConfig({
   site: "https://astro-sphere-demo.vercel.app",
@@ -21,9 +19,5 @@ export default defineConfig({
     enabled: false,
   },
 
-  output: "server",
-  adapter: vercel({
-    analytics: true,
-    nodeVersion: '18.x'
-  }),
+  output: "static",
 })
