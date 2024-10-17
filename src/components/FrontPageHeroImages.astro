@@ -2,35 +2,40 @@
 import { Image } from 'astro:assets';
 
 const images = [
-  { src: "/front-component/animals.jpg", alt: "Animals", href: "/animals" },
-  { src: "/front-component/cosmetics.jpg", alt: "Cosmetics", href: "/cosmetics" },
-  { src: "/front-component/drinks.jpg", alt: "Drinks", href: "/drinks" },
-  { src: "/front-component/food.jpg", alt: "Food", href: "/food" },
-  { src: "/front-component/people.jpg", alt: "People", href: "/people" },
-  { src: "/front-component/still-life.jpg", alt: "Still Life", href: "/still-life" },
-  { src: "/front-component/technology.jpg", alt: "Technology", href: "/technology" },
-  { src: "/front-component/animals2.jpg", alt: "Animals", href: "/animals" },
+  { src: import("../../public/front-component/animals.jpg"), alt: "Animals", href: "/animals" },
+  { src: import("../../public/front-component/cosmetics.jpg"), alt: "Cosmetics", href: "/cosmetics" },
+  { src: import("../../public/front-component/drinks.jpg"), alt: "Drinks", href: "/drinks" },
+  { src: import("../../public/front-component/food.jpg"), alt: "Food", href: "/food" },
+  { src: import("../../public/front-component/people.jpg"), alt: "People", href: "/people" },
+  { src: import("../../public/front-component/still-life.jpg"), alt: "Still Life", href: "/still-life" },
+  { src: import("../../public/front-component/technology.jpg"), alt: "Technology", href: "/technology" },
+  { src: import("../../public/front-component/animals2.jpg"), alt: "Animals", href: "/animals" },
 ];
 ---
 
 <div class="w-full px-4 py-8 mt-5">
   <div class="max-w-[1064px] mx-auto">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-      {images.map((image, index) => (
-        <a href={image.href} class="block overflow-hidden rounded-lg relative group aspect-square">
-          <Image
-            src={image.src}
-            alt={image.alt}
-            width={300}
-            height={300}
-            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-            loading={index < 4 ? "eager" : "lazy"}
-          />
-          <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <span class="text-white text-lg sm:text-xl md:text-2xl font-bold">{image.alt}</span>
-          </div>
-        </a>
-      ))}
+      {images.map(async (image, index) => {
+        const { default: src } = await image.src;
+        return (
+          <a href={image.href} class="block overflow-hidden rounded-lg relative group aspect-square">
+            <Image
+              src={src}
+              alt={image.alt}
+              width={600}
+              height={600}
+              format="webp"
+              quality={80}
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              loading={index < 4 ? "eager" : "lazy"}
+            />
+            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span class="text-white text-lg sm:text-xl md:text-2xl font-bold">{image.alt}</span>
+            </div>
+          </a>
+        );
+      })}
     </div>
   </div>
 </div>

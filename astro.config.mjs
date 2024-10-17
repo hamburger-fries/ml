@@ -20,5 +20,10 @@ export default defineConfig({
     build: {
       minify: false // Disable minification
     }
+  },
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp'
+    }
   }
 });
