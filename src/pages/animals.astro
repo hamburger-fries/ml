@@ -3,76 +3,119 @@ import PageLayout from "@layouts/PageLayout.astro";
 import Gallery from "@components/Gallery.astro";
 
 const imageFiles = [
-  "afgan copy.jpg",
-  "animal 6b copy.jpg",
-  "animal 7 copy.jpg",
-  "animal 13 copy.jpg",
-  "animal 16 copy.jpg",
-  "animal 17 copy.jpg",
-  "animal 21 copy.jpg",
-  "animal 22 copy.jpg",
-  "animal 27 copy.jpg",
-  "animals 31 copy.jpg",
-  "animals 35 copy.jpg",
-  "Animals 39 copy.jpg",
-  "animals 48 copy.jpg",
-  "animals 51 copy.jpg",
-  "animals 54 copy.jpg",
-  "animals 55 copy.jpg",
-  "animals 56 copy.jpg",
-  "animals 58 copy.jpg",
-  "animals 59 copy.jpg",
-  "animals 60 copy.jpg",
-  "animals left copy 2.jpg",
-  "animals left copy.jpg",
-  "Blue Blubber Jellyfish copy.jpg",
-  "Comet and Panther Groupers copy.jpg",
-  "Common Octopus copy.jpg",
-  "Common Seahorses copy.jpg",
-  "goldfish port copy.jpg",
-  "hairless cat copy.jpg",
-  "King Cobra 2 copy.jpg",
-  "leopard copy.jpg",
-  "Lion face copy.jpg",
-  "Orange Moor Goldfish 1 copy.jpg",
-  "page 02 copy.jpg",
-  "page 05 copy.jpg",
-  "page 12 copy.jpg",
-  "page 13 copy.jpg",
-  "page 14 copy.jpg",
-  "page 15 copy.jpg",
-  "page 19 copy.jpg",
-  "page 20 copy.jpg",
-  "page 25 copy.jpg",
-  "Panther chameleon hanging copy.jpg",
-  "Paper Chase DOGS p 2 copy.jpg",
-  "Paper Chase DOGS p 3 copy.jpg",
-  "Paper Chase DOGS p 6 copy.jpg",
-  "Paper Chase promo Liquor pg 9 copy.jpg",
-  "Red Junglefowl copy.jpg",
-  "Ring-Necked Pheasant copy.jpg",
-  "serpentine port page copy.jpg",
-  "small dog copy.jpg",
-  "spider copy 2.jpg",
-  "spider copy.jpg",
-  "spotted cat push up copy.jpg",
-  "Spotted Jellyfish copy.jpg",
-  "striped brown cat copy.jpg",
-  "Vogel's Pit Viper Playing  copy.jpg",
-  "Weimariner 5 copy 2.jpg",
-  "WF Elephant copy.jpg",
-  "WF Zebra copy.jpg",
-  "white cat looking back copy.jpg"
+  "afgan_.jpg",
+  "animal_6b_.jpg",
+  "animal_7_.jpg",
+  "animal_13_.jpg",
+  "animal_16_.jpg",
+  "animal_17_.jpg",
+  "animal_21_.jpg",
+  "animal_22_.jpg",
+  "animal_27_.jpg",
+  "animals_31_.jpg",
+  "animals_35_.jpg",
+  "Animals_39_.jpg",
+  "animals_48_.jpg",
+  "animals_51_.jpg",
+  "animals_54_.jpg",
+  "animals_55_.jpg",
+  "animals_56_.jpg",
+  "animals_58_.jpg",
+  "animals_59_.jpg",
+  "animals_60_.jpg",
+  "animals_left__2.jpg",
+  "animals_left_.jpg",
+  "Blue_Blubber_Jellyfish_.jpg",
+  "Comet_and_Panther_Groupers_.jpg",
+  "Common_Octopus_.jpg",
+  "Common_Seahorses_.jpg",
+  "goldfish_port_.jpg",
+  "hairless_cat_.jpg",
+  "King_Cobra_2_.jpg",
+  "leopard_.jpg",
+  "Lion_face_.jpg",
+  "Orange_Moor_Goldfish_1_.jpg",
+  "page_02_.jpg",
+  "page_05_.jpg",
+  "page_12_.jpg",
+  "page_13_.jpg",
+  "page_14_.jpg",
+  "page_15_.jpg",
+  "page_19_.jpg",
+  "page_20_.jpg",
+  "page_25_.jpg",
+  "Panther_chameleon_hanging_.jpg",
+  "Paper_Chase_DOGS_p_2_.jpg",
+  "Paper_Chase_DOGS_p_3_.jpg",
+  "Paper_Chase_DOGS_p_6_.jpg",
+  "Paper_Chase_promo_Liquor_pg_9_.jpg",
+  "Red_Junglefowl_.jpg",
+  "Ring-Necked_Pheasant_.jpg",
+  "serpentine_port_page_.jpg",
+  "small_dog_.jpg",
+  "spider__2.jpg",
+  "spider_.jpg",
+  "spotted_cat_push_up_.jpg",
+  "Spotted_Jellyfish_.jpg",
+  "striped_brown_cat_.jpg",
+  "Vogels_Pit_Viper_Playing__.jpg",
+  "Weimariner_5__2.jpg",
+  "WF_Elephant_.jpg",
+  "WF_Zebra_.jpg",
+  "white_cat_looking_back_.jpg"
 ];
 
 const images = imageFiles.map(file => ({
-  imgUrl: `${import.meta.env.BASE_URL}images/photos/animals/${file}`,
-  alt: file.replace(/\.(jpg|jpeg|png|gif)$/i, '').replace(/\s+copy\s*\d*/i, '').replace(/[-_]/g, ' ')
+  imgUrl: `/images/photos/animals/${file}`,
+  alt: file.replace(/\.(jpg|jpeg|png|gif)$/i, '')
+           .replace(/[_-]/g, ' ')
+           .replace(/\s+/g, ' ')
+           .trim()
 }));
 ---
 
 <PageLayout title="Animals" description="A gallery of animal photographs">
-  <div class="w-full max-w-screen-xl mx-auto px-4 mt-12">
+  <div class="w-full max-w-screen-xl mx-auto px-4 mt-[60px]">
     <Gallery images={images} />
   </div>
 </PageLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.gallery-image');
+    images.forEach((img, index) => {
+      if (img instanceof HTMLImageElement) {
+        img.addEventListener('error', function() {
+          console.error(`Failed to load image ${index + 1}: ${this.src}`);
+          // Instead of hiding the image, let's show an error placeholder
+          this.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-size%3D%2214%22%20fill%3D%22%23aaa%22%3EError%3C%2Ftext%3E%3C%2Fsvg%3E';
+          this.alt = 'Error loading image';
+        });
+        img.addEventListener('load', function() {
+          console.log(`Successfully loaded image ${index + 1}: ${this.src}`);
+        });
+      }
+    });
+  });
+
+  // Function to check if images are loading correctly
+  function checkImages() {
+    const images = document.querySelectorAll('.gallery-image');
+    images.forEach((img, index) => {
+      if (img instanceof HTMLImageElement) {
+        fetch(img.src)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.blob();
+          })
+          .then(() => console.log(`Image ${index + 1} is accessible`))
+          .catch(e => console.error(`Error with image ${index + 1}: ${e.message}`));
+      }
+    });
+  }
+
+  // Run the check after a short delay to ensure all images have been processed
+  setTimeout(checkImages, 2000);
+</script>

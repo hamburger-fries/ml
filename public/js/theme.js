@@ -31,6 +31,7 @@ function changeTheme() {
 
 function preloadTheme() {
   const storedTheme = localStorage.theme
+  // Default to 'light' if no theme is stored
   const theme = storedTheme === "dark" ? "dark" : "light"
 
   const element = document.documentElement

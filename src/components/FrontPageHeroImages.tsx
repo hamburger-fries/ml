@@ -14,22 +14,22 @@ const images = [
 const FrontPageHeroImages: React.FC = () => {
   console.log('FrontPageHeroImages component is rendering');
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
       {images.map((image) => (
-        <div key={image.name}>
-          <Card>
-            <a href={`#${image.name}`}>
-              <img
-                src={image.src}
-                alt={image.alt}
-                style={{ height: '300px', width: '300px', objectFit: 'cover', borderRadius: '0.5rem' }}
-                onError={() => console.error(`Failed to load image: ${image.src}`)}
-              />
-            </a>
-          </Card>
+        <div key={image.name} className="relative group overflow-hidden rounded-lg">
+          <a href={`#${image.name}`}>
+            <img
+              src={image.src}
+              alt={image.alt}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 aspect-square"
+              onError={() => console.error(`Failed to load image: ${image.src}`)}
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span className="text-white text-2xl font-bold">{image.alt}</span>
+            </div>
+          </a>
         </div>
       ))}
-      <div>Debug: Component rendered successfully</div>
     </div>
   );
 };

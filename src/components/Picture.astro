@@ -7,29 +7,12 @@ interface Props {
 }
 
 const { imgUrl, alt, sizes, class: className } = Astro.props;
-
-function generateSrcSet(url: string) {
-  const widths = [300, 600, 1200];
-  const urlParts = url.split('.');
-  const extension = urlParts.length > 1 ? urlParts.pop() : '';
-  const baseUrl = urlParts.join('.');
-  
-  if (!extension) {
-    console.warn(`No file extension found for image: ${url}`);
-    return url;
-  }
-
-  return widths.map(w => `${baseUrl}-${w}w.${extension} ${w}w`).join(', ');
-}
-
-const srcset = generateSrcSet(imgUrl);
 ---
 
 <img
   src={imgUrl}
-  srcset={srcset}
-  sizes={sizes || '(max-width: 1200px) 100vw, 1200px'}
   alt={alt}
+  sizes={sizes || '(max-width: 1200px) 100vw, 1200px'}
   class={className}
   loading="lazy"
 />

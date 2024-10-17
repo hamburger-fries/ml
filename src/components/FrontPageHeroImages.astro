@@ -1,45 +1,36 @@
 ---
 import { Image } from 'astro:assets';
-import '../styles/FrontPageHeroImages.css';
 
-interface ImageLinkProps {
-  href: string;
-  src: string;
-  alt: string;
-}
-
-const imageLinks: ImageLinkProps[] = [
-  { href: "/animals", src: "/front-component/animals.jpg", alt: "Animals" },
-  { href: "/cosmetics", src: "/front-component/cosmetics.jpg", alt: "Cosmetics" },
-  { href: "/drinks", src: "/front-component/drinks.jpg", alt: "Drinks" },
-  { href: "/food", src: "/front-component/food.jpg", alt: "Food" },
-  { href: "/people", src: "/front-component/people.jpg", alt: "People" },
-  { href: "/still-life", src: "/front-component/still-life.jpg", alt: "Still Life" },
-  { href: "/technology", src: "/front-component/technology.jpg", alt: "Technology" },
-  { href: "/animals", src: "/front-component/animals2.jpg", alt: "Animals" },
+const images = [
+  { src: "/front-component/animals.jpg", alt: "Animals", href: "/animals" },
+  { src: "/front-component/cosmetics.jpg", alt: "Cosmetics", href: "/cosmetics" },
+  { src: "/front-component/drinks.jpg", alt: "Drinks", href: "/drinks" },
+  { src: "/front-component/food.jpg", alt: "Food", href: "/food" },
+  { src: "/front-component/people.jpg", alt: "People", href: "/people" },
+  { src: "/front-component/still-life.jpg", alt: "Still Life", href: "/still-life" },
+  { src: "/front-component/technology.jpg", alt: "Technology", href: "/technology" },
+  { src: "/front-component/animals2.jpg", alt: "Animals", href: "/animals" },
 ];
 ---
 
-<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="image-grid">
-    {imageLinks.map((image) => (
-      <div class="image-item">
-        <a href={image.href} class="block w-full h-full" aria-label={`View ${image.alt} category`}>
+<div class="w-full px-4 py-8 mt-5">
+  <div class="max-w-[1064px] mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+      {images.map((image, index) => (
+        <a href={image.href} class="block overflow-hidden rounded-lg relative group aspect-square">
           <Image
             src={image.src}
             alt={image.alt}
-            width={265}
-            height={265}
-            class="w-full h-full object-cover"
-            loading="lazy"
+            width={300}
+            height={300}
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            loading={index < 4 ? "eager" : "lazy"}
           />
-          <div class="image-overlay">
-            <span class="image-label">
-              {image.alt}
-            </span>
+          <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="text-white text-lg sm:text-xl md:text-2xl font-bold">{image.alt}</span>
           </div>
         </a>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 </div>

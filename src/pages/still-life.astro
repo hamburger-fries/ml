@@ -8,60 +8,103 @@ interface Image {
 }
 
 const imageFiles: string[] = [
-  "ballon molds a copy.jpg",
-  "c copy.jpg",
-  "Coral Tree Flower copy.jpg",
-  "Dahlia 'Snowbound' rear copy.jpg",
-  "Dahlia 'Winsome' copy.jpg",
-  "Dahlia underside copy.jpg",
-  "eph jj copy.jpg",
-  "Ephemera 106 copy.jpg",
-  "Ephemera 672 copy.jpg",
-  "Ephemera 913 copy.jpg",
-  "ephemera 1245 copy.jpg",
-  "Flaming Parrot Tulip copy.jpg",
-  "Green Rounds ip2 copy.jpg",
-  "iron shoe lasts copy.jpg",
-  "Jade Vine ip6 copy.jpg",
-  "New Port image 3 copy.jpg",
-  "New Port image 6 copy 2.jpg",
-  "New Port image 6 copy.jpg",
-  "New Port image 8 copy.jpg",
-  "P aeonium copy.jpg",
-  "P hourglass copy.jpg",
-  "P shell copy.jpg",
-  "page  copy.jpg",
-  "page 08 copy.jpg",
-  "page 16 copy.jpg",
-  "page 17 copy.jpg",
-  "page 18 copy.jpg",
-  "paint dd copy.jpg",
-  "Paint ribbon 3 copy.jpg",
-  "Paint ribbon copy.jpg",
-  "Passiflora Quadrangularis copy.jpg",
-  "Picotee Cosmos 2 copy.jpg",
-  "Pink and White dahlia copy 2.jpg",
-  "post it green copy.jpg",
-  "post it magenta copy.jpg",
-  "pulley copy 2.jpg",
-  "Red Tail Boa Skeleton copy.jpg",
-  "Rooster Cock's Comb copy.jpg",
-  "Still Life 38 copy.jpg",
-  "tech 64 copy.jpg",
-  "tech 65 copy.jpg",
-  "twist orchid copy.jpg",
-  "Vulcan Magnolia copy.jpg",
-  "wrench copy.jpg"
+  "ballon_molds_a_.jpg",
+  "c_.jpg",
+  "Coral_Tree_Flower_.jpg",
+  "Dahlia_Snowbound_rear_.jpg",
+  "Dahlia_underside_.jpg",
+  "Dahlia_Winsome_.jpg",
+  "eph_jj_.jpg",
+  "Ephemera_106_.jpg",
+  "Ephemera_672_.jpg",
+  "Ephemera_913_.jpg",
+  "ephemera_1245_.jpg",
+  "Flaming_Parrot_Tulip_.jpg",
+  "Green_Rounds_ip2_.jpg",
+  "iron_shoe_lasts_.jpg",
+  "Jade_Vine_ip6_.jpg",
+  "New_Port_image_3_.jpg",
+  "New_Port_image_6__2.jpg",
+  "New_Port_image_6_.jpg",
+  "New_Port_image_8_.jpg",
+  "P_aeonium_.jpg",
+  "P_hourglass_.jpg",
+  "P_shell_.jpg",
+  "page__.jpg",
+  "page_08_.jpg",
+  "page_16_.jpg",
+  "page_17_.jpg",
+  "page_18_.jpg",
+  "paint_dd_.jpg",
+  "Paint_ribbon_.jpg",
+  "Paint_ribbon_3_.jpg",
+  "Passiflora_Quadrangularis_.jpg",
+  "Picotee_Cosmos_2_.jpg",
+  "Pink_and_White_dahlia__2.jpg",
+  "post_it_green_.jpg",
+  "post_it_magenta_.jpg",
+  "pulley__2.jpg",
+  "Red_Tail_Boa_Skeleton_.jpg",
+  "Rooster_Cocks_Comb_.jpg",
+  "Still_Life_38_.jpg",
+  "tech_64_.jpg",
+  "tech_65_.jpg",
+  "twist_orchid_.jpg",
+  "Vulcan_Magnolia_.jpg",
+  "wrench_.jpg"
 ];
 
 const images: Image[] = imageFiles.map(file => ({
   imgUrl: `/images/photos/still-life/${file}`,
-  alt: file.replace(/\.(jpg|jpeg|png|gif)$/i, '').replace(/\s+copy\s*\d*/i, '').replace(/[-_]/g, ' ')
+  alt: file.replace(/\.(jpg|jpeg|png|gif)$/i, '')
+           .replace(/[_-]/g, ' ')
+           .replace(/\s+/g, ' ')
+           .trim()
 }));
 ---
 
 <PageLayout title="Still Life" description="A gallery of still life photographs">
-  <div class="w-full max-w-screen-xl mx-auto px-4 mt-12">
+  <div class="w-full max-w-screen-xl mx-auto px-4 mt-[60px]">
     <Gallery images={images} />
   </div>
 </PageLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.gallery-image');
+    images.forEach((img, index) => {
+      if (img instanceof HTMLImageElement) {
+        img.addEventListener('error', function() {
+          console.error(`Failed to load image ${index + 1}: ${this.src}`);
+          // Instead of hiding the image, let's show an error placeholder
+          this.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-size%3D%2214%22%20fill%3D%22%23aaa%22%3EError%3C%2Ftext%3E%3C%2Fsvg%3E';
+          this.alt = 'Error loading image';
+        });
+        img.addEventListener('load', function() {
+          console.log(`Successfully loaded image ${index + 1}: ${this.src}`);
+        });
+      }
+    });
+  });
+
+  // Function to check if images are loading correctly
+  function checkImages() {
+    const images = document.querySelectorAll('.gallery-image');
+    images.forEach((img, index) => {
+      if (img instanceof HTMLImageElement) {
+        fetch(img.src)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.blob();
+          })
+          .then(() => console.log(`Image ${index + 1} is accessible`))
+          .catch(e => console.error(`Error with image ${index + 1}: ${e.message}`));
+      }
+    });
+  }
+
+  // Run the check after a short delay to ensure all images have been processed
+  setTimeout(checkImages, 2000);
+</script>

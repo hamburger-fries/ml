@@ -102,4 +102,6 @@ const subpath = pathname.match(/[^/]+/g)
 
   // Run the setup function when the DOM is ready
   document.addEventListener('DOMContentLoaded', setupThemeToggle);
+  // Also run the setup function after Astro page transitions
+  document.addEventListener('astro:after-swap', setupThemeToggle);
 </script>

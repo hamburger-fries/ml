@@ -11,21 +11,21 @@ interface Props {
 const { images } = Astro.props;
 ---
 
-<div
-  class="w-full px-4 mt-8 columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-3"
->
-  {
-    images.map((image) => (
-      <div class="mb-3 break-inside-avoid">
-        <Picture
-          imgUrl={image.imgUrl}
-          alt={image.alt}
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          class="w-full aspect-auto rounded-lg cursor-pointer gallery-image"
-        />
-      </div>
-    ))
-  }
+<div class="w-full mt-8">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[18px]">
+    {
+      images.map((image) => (
+        <div class="w-full">
+          <Picture
+            imgUrl={image.imgUrl}
+            alt={image.alt}
+            sizes="(max-width: 270px) 100vw, 270px"
+            class="w-full h-full object-cover rounded-lg cursor-pointer gallery-image"
+          />
+        </div>
+      ))
+    }
+  </div>
 </div>
 
 <div
