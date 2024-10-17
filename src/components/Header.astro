@@ -13,7 +13,8 @@ const subpath = pathname.match(/[^/]+/g)
     <div class="relative py-2 sm:py-4">
       <div class="flex items-center justify-between">
         <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity duration-300 ease-in-out">
-          <img src="/images/logo.png" alt="Mark Lata Logo" class="h-6 w-auto sm:h-8" />
+          <img src="/images/logo.png" alt="Mark Lata Logo" class="h-6 w-auto sm:h-8 block dark:hidden" />
+          <img src="/images/logo-dark.png" alt="Mark Lata Logo" class="h-6 w-auto sm:h-8 hidden dark:block" />
         </a>
 
         <nav class="hidden lg:flex items-center justify-between gap-4 text-base">

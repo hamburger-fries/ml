@@ -20,62 +20,97 @@
   }
 }
 
-html {
-  overflow-y: scroll;
-  color-scheme: light;
-  background-color: white;
-  font-family: "Atkinson", sans-serif;
-  
+@layer components {
+  html {
+    @apply overflow-y-scroll text-black/75 dark:text-white/75 bg-white dark:bg-black font-['Atkinson',sans-serif];
+  }
+
+  html.dark {
+    @apply bg-black;
+  }
+
+  html,
+  body {
+    @apply h-full w-full antialiased bg-white dark:bg-black text-black/75 dark:text-white/75;
+  }
+
+  body {
+    @apply relative flex flex-col;
+  }
+
+  main {
+    @apply flex flex-col flex-1 bg-white dark:bg-black;
+  }
+
+  header {
+    @apply border-b transition-all duration-300 ease-in-out;
+  }
+
+  header:not(.scrolled) {
+    @apply bg-transparent border-transparent;
+  }
+
+  header.scrolled {
+    @apply bg-white/75 dark:bg-black/50 border-black/10 dark:border-white/25 backdrop-blur-sm saturate-200;
+  }
+
+  article {
+    @apply prose dark:prose-invert max-w-full pb-12;
+  }
+
+  .page-heading {
+    @apply font-semibold text-black dark:text-white;
+  }
+
+  .blend {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .animate {
+    @apply opacity-0 translate-y-[50px] transition-all duration-1000 ease-in-out;
+  }
+
+  .animate.show {
+    @apply opacity-100 translate-y-0;
+  }
+
+  article img {
+    @apply py-5 mx-auto block;
+  }
+
+  #twinkle-star.template {
+    @apply absolute -left-full;
+  }
+
+  #twinkle-star.twinkle {
+    @apply animate-twinkle;
+  }
+
+  #meteors .shower {
+    @apply absolute inset-0 top-0 left-1/2 -translate-x-1/2 w-screen aspect-square;
+  }
+
+  #meteors .meteor {
+    @apply animate-meteor absolute top-1/2 left-1/2 w-px h-[75vh] bg-gradient-to-b from-white to-transparent;
+  }
+
+  #meteors .shower.ur {
+    @apply rotate-45;
+  }
+
+  #meteors .shower.dr {
+    @apply rotate-135;
+  }
+
+  #meteors .shower.dl {
+    @apply rotate-225;
+  }
+
+  #meteors .shower.ul {
+    @apply rotate-315;
+  }
 }
 
-html.dark {
-  color-scheme: dark;
-  background-color: black;
-}
-
-html,
-body {
-  @apply h-full w-full antialiased;
-  @apply bg-white dark:bg-black;
-  @apply text-black/75 dark:text-white/75;
-}
-
-body {
-  @apply relative flex flex-col;
-}
-
-main {
-  @apply flex flex-col flex-1 bg-white dark:bg-black;
-}
-
-header {
-  @apply border-b;
-  @apply transition-all duration-300 ease-in-out;
-}
-
-header:not(.scrolled) {
-  @apply bg-transparent border-transparent;
-}
-
-header.scrolled {
-  @apply bg-white/75 dark:bg-black/50;
-  @apply border-black/10 dark:border-white/25;
-  @apply backdrop-blur-sm saturate-200;
-}
-
-article {
-  @apply prose dark:prose-invert max-w-full pb-12;
-}
-
-.page-heading {
-  @apply font-semibold text-black dark:text-white;
-}
-
-.blend {
-  @apply transition-all duration-300 ease-in-out;
-}
-
-/** Light theme particles on home page */
 @keyframes animateParticle {
   from {
     transform: translateY(0px);
@@ -83,68 +118,4 @@ article {
   to {
     transform: translateY(-2000px);
   }
-}
-
-/** styles for public /animation.js */
-.animate {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-.animate.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-article img {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  display: block;
-  margin: 0 auto;
-}
-
-/**
- * TWINKLE STARS
- */
-
- #twinkle-star.template {
-  @apply absolute -left-full; /* hide offscreen */
-}
-
-#twinkle-star.twinkle {
-  @apply animate-twinkle; /* defined in tailwind.config */
-}
-
-
-/**
- * Meteors
- */
-
-#meteors .shower {
-  @apply absolute inset-0 top-0;;
-  @apply left-1/2 -translate-x-1/2;
-  @apply w-screen aspect-square;
-}
-
-#meteors .meteor {
-  @apply animate-meteor; /* defined in tailwind.config */
-  @apply absolute top-1/2 left-1/2 w-px h-[75vh];
-  @apply bg-gradient-to-b from-white to-transparent;
-}
-
-#meteors .shower.ur {
-  @apply rotate-45;
-}
-
-#meteors .shower.dr {
-  @apply rotate-135;
-}
-
-#meteors .shower.dl {
-  @apply rotate-225;
-}
-
-#meteors .shower.ul {
-  @apply rotate-315;
 }
