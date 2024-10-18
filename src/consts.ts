@@ -10,32 +10,32 @@ export const SITE: Site = {
 // Links
 export const LINKS: Links = [
   {
-    TEXT: "Animals",
-    HREF: "/animals",
+    TEXT: "Drinks",
+    HREF: "/drinks",
   },
   {
     TEXT: "Cosmetics",
     HREF: "/cosmetics",
   },
   {
-    TEXT: "Drinks",
-    HREF: "/drinks",
-  },
-  {
-    TEXT: "Food",
-    HREF: "/food",
+    TEXT: "Technology",
+    HREF: "/technology",
   },
   {
     TEXT: "People",
     HREF: "/people",
   },
   {
+    TEXT: "Animals",
+    HREF: "/animals",
+  },
+  {
     TEXT: "Still-Life",
     HREF: "/still-life",
   },
   {
-    TEXT: "Technology",
-    HREF: "/technology",
+    TEXT: "Food",
+    HREF: "/food",
   },
 ]
 
