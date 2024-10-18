@@ -1,22 +1,72 @@
-// Function to set a given theme/color-scheme
-function setTheme(themeName) {
-    localStorage.setItem('theme', themeName);
-    document.documentElement.className = themeName;
+function changeTheme() {
+  const element = document.documentElement
+  const theme = element.classList.contains("dark") ? "light" : "dark"
+
+  const css = document.createElement("style")
+
+  css.appendChild(
+    document.createTextNode(
+      `* {
+           -webkit-transition: none !important;
+           -moz-transition: none !important;
+           -o-transition: none !important;
+           -ms-transition: none !important;
+           transition: none !important;
+        }`,
+    ),
+  )
+  document.head.appendChild(css)
+
+  if (theme === "dark") {
+    element.classList.add("dark")
+  } else {
+    element.classList.remove("dark")
+  }
+
+  // Force a reflow
+  void window.getComputedStyle(css).opacity
+  document.head.removeChild(css)
+  localStorage.theme = theme
 }
 
-// Function to toggle between light and dark theme
-function toggleTheme() {
-    if (localStorage.getItem('theme') === 'theme-dark') {
-        setTheme('theme-light');
-    } else {
-        setTheme('theme-dark');
-    }
+function preloadTheme() {
+  const storedTheme = localStorage.theme
+  // Default to 'light' if no theme is stored
+  const theme = storedTheme === "dark" ? "dark" : "light"
+
+  const element = document.documentElement
+
+  if (theme === "dark") {
+    element.classList.add("dark")
+  } else {
+    element.classList.remove("dark")
+  }
+
+  localStorage.theme = theme
 }
 
-// Immediately set the theme to light on page load
-setTheme('theme-light');
-
-// Bind the toggle to the button click event
-if (document.getElementById('themeButton')) {
-    document.getElementById('themeButton').addEventListener('click', toggleTheme);
+function initializeThemeButtons() {
+  const headerThemeButton = document.getElementById("header-theme-button")
+  const drawerThemeButton = document.getElementById("drawer-theme-button")
+  headerThemeButton?.addEventListener("click", changeTheme)
+  drawerThemeButton?.addEventListener("click", changeTheme)
 }
+
+// Apply theme immediately, defaulting to light
+function applyDefaultTheme() {
+  const storedTheme = localStorage.theme
+  if (!storedTheme) {
+    localStorage.theme = 'light'
+    document.documentElement.classList.remove('dark')
+  } else {
+    preloadTheme()
+  }
+}
+
+// Apply default theme immediately
+applyDefaultTheme()
+
+// Set up event listeners
+window.addEventListener("load", initializeThemeButtons)
+document.addEventListener("astro:after-swap", initializeThemeButtons)
+document.addEventListener("astro:after-swap", applyDefaultTheme)
