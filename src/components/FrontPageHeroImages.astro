@@ -1,49 +1,48 @@
 ---
 import { Image } from 'astro:assets';
+import drinks from "../../public/front-component/drinks.jpg";
+import cosmetics from "../../public/front-component/cosmetics.jpg";
+import technology from "../../public/front-component/technology.jpg";
+import people from "../../public/front-component/people.jpg";
+import animals from "../../public/front-component/animals.jpg";
+import stillLife from "../../public/front-component/still-life.jpg";
+import food from "../../public/front-component/food.jpg";
+import animals2 from "../../public/front-component/animals2.jpg";
 
 const images = [
-  { src: import("../../public/front-component/drinks.jpg"), alt: "Drinks", href: "/drinks" },
-  { src: import("../../public/front-component/cosmetics.jpg"), alt: "Cosmetics", href: "/cosmetics" },
-  { src: import("../../public/front-component/technology.jpg"), alt: "Technology", href: "/technology" },
-  { src: import("../../public/front-component/people.jpg"), alt: "People", href: "/people" },
-  { src: import("../../public/front-component/animals.jpg"), alt: "Animals", href: "/animals" },
-  { src: import("../../public/front-component/still-life.jpg"), alt: "Still Life", href: "/still-life" },
-  { src: import("../../public/front-component/food.jpg"), alt: "Food", href: "/food" },
-  { src: import("../../public/front-component/animals2.jpg"), alt: "Animals", href: "/animals" },
+  { src: drinks, alt: "Drinks", href: "/drinks" },
+  { src: cosmetics, alt: "Cosmetics", href: "/cosmetics" },
+  { src: technology, alt: "Technology", href: "/technology" },
+  { src: people, alt: "People", href: "/people" },
+  { src: animals, alt: "Animals", href: "/animals" },
+  { src: stillLife, alt: "Still Life", href: "/still-life" },
+  { src: food, alt: "Food", href: "/food" },
+  { src: animals2, alt: "Animals", href: "/animals" },
 ];
 ---
 
-<div class="w-full px-4 py-4 mt-[30px] mb-[30px]">
-  <div class="max-w-[1064px] mx-auto">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-4">
-      {images.map(async (image, index) => {
-        const { default: src } = await image.src;
-        return (
-          <a href={image.href} class="block overflow-hidden rounded-lg relative group aspect-square lg:aspect-[4/3]">
+<div class="w-full px-4 py-8 mt-[30px] mb-[30px]">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[18px]">
+      {images.map((image, index) => (
+        <a href={image.href} class="block overflow-hidden rounded-lg relative group aspect-square w-full h-full">
+          <div class="w-full h-full">
             <Image
-              src={src}
+              src={image.src}
               alt={image.alt}
-              width={600}
-              height={600}
+              width={400}
+              height={400}
               format="webp"
               quality={80}
               class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               loading={index < 4 ? "eager" : "lazy"}
             />
-            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <span class="text-white text-lg sm:text-xl md:text-2xl font-bold">{image.alt}</span>
-            </div>
-          </a>
-        );
-      })}
+          </div>
+          <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="text-white text-xl sm:text-2xl lg:text-3xl font-bold">{image.alt}</span>
+          </div>
+        </a>
+      ))}
     </div>
   </div>
 </div>
-
-<style>
-  @media (min-width: 1024px) {
-    .aspect-[4/3] {
-      aspect-ratio: 4 / 3;
-    }
-  }
-</style>
