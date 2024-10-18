@@ -17,17 +17,15 @@ const { title, description } = Astro.props;
   <body class="flex flex-col min-h-screen">
     <Header />
     <Drawer />
-    <main class="flex-grow pt-[30px]">
+    <main class="flex pt-[30px]">
       <slot />
     </main>
     <Footer />
     <script>
       // Apply the saved theme on initial page load
-      const savedTheme = localStorage.getItem('theme');
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      const theme = savedTheme || systemTheme;
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.documentElement.classList.add("dark");
       }
     </script>
   </body>
