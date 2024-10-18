@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 import drinks from "../../public/front-component/drinks.jpg";
 import cosmetics from "../../public/front-component/cosmetics.jpg";
 import technology from "../../public/front-component/technology.jpg";
@@ -21,28 +21,37 @@ const images = [
 ];
 ---
 
-<div class="w-full px-4 py-8 mt-[30px] mb-[30px]">
+<div class="w-full px-4 py-8 mt-[18px] mb-[0px]">
   <div class="max-w-[1600px] mx-auto">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[18px]">
-      {images.map((image, index) => (
-        <a href={image.href} class="block overflow-hidden rounded-lg relative group aspect-square w-full h-full">
-          <div class="w-full h-full">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={400}
-              height={400}
-              format="webp"
-              quality={80}
-              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-              loading={index < 4 ? "eager" : "lazy"}
-            />
-          </div>
-          <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <span class="text-white text-xl sm:text-2xl lg:text-3xl font-bold">{image.alt}</span>
-          </div>
-        </a>
-      ))}
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[18px]"
+    >
+      {
+        images.map((image, index) => (
+          <a
+            href={image.href}
+            class="block overflow-hidden rounded-lg relative group aspect-square w-full h-full"
+          >
+            <div class="w-full h-full">
+              <Image
+                src={image.src}
+                alt={image.alt}
+                width={400}
+                height={400}
+                format="webp"
+                quality={80}
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                loading={index < 4 ? "eager" : "lazy"}
+              />
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span class="text-white text-xl sm:text-2xl lg:text-3xl font-bold">
+                {image.alt}
+              </span>
+            </div>
+          </a>
+        ))
+      }
     </div>
   </div>
 </div>
