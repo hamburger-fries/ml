@@ -1,7 +1,5 @@
 const savedTheme = localStorage.getItem("theme");
-const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-const theme = savedTheme || systemTheme;
-if (theme === "dark") {
+if (savedTheme === "dark") {
   document.documentElement.classList.add("dark");
 }
 
@@ -9,6 +7,8 @@ function setupThemeToggle() {
   const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
   mobileMenuToggle?.addEventListener("click", () => {
+    const isExpanded = mobileMenuToggle.getAttribute("aria-expanded") === "true";
+    mobileMenuToggle.setAttribute("aria-expanded", (!isExpanded).toString());
     mobileMenu?.classList.toggle("hidden");
   });
   const themeToggleButton = document.getElementById("header-theme-button");
@@ -26,11 +26,6 @@ function setupThemeToggle() {
   themeToggleButton?.addEventListener("click", () => {
     const isDark = document.documentElement.classList.contains("dark");
     setTheme(isDark ? "light" : "dark");
-  });
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-    if (!localStorage.getItem("theme")) {
-      setTheme("light");
-    }
   });
 }
 document.addEventListener("DOMContentLoaded", setupThemeToggle);

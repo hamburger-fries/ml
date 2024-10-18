@@ -1,4 +1,4 @@
-import './hoisted.KFj_0oDy.js';
+import './hoisted.BkMUZmKb.js';
 
 function createDot() {
   const dot = document.createElement("div");

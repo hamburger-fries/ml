@@ -1,3 +1,3 @@
-import './hoisted.KFj_0oDy.js';
+import './hoisted.BkMUZmKb.js';
 
 console.log("Demo page script executed");
