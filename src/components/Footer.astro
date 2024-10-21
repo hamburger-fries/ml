@@ -1,5 +1,5 @@
 ---
-import { SITE, SOCIALS } from "@consts";
+import { SITE } from "@consts";
 import Container from "@components/Container.astro";
 ---
 
@@ -56,8 +56,10 @@ import Container from "@components/Container.astro";
               href="/"
               class="flex gap-1 w-fit hover:opacity-80 transition-opacity duration-300 ease-in-out"
             >
-              <img src="/images/logo.png" alt="Mark Lata Logo" class="h-6 sm:h-8 w-auto block dark:hidden" />
-              <img src="/images/logo-dark.png" alt="Mark Lata Logo" class="h-6 sm:h-8 w-auto hidden dark:block" />
+              <!-- Light mode (black) logo -->
+              <img src="/images/logo.png" alt="Mark Lata Logo" class="h-6 sm:h-8 w-auto block dark:hidden !important" />
+              <!-- Dark mode (white) logo -->
+              <img src="/images/logo-dark.png" alt="Mark Lata Logo" class="h-6 sm:h-8 w-auto hidden dark:block !important" />
             </a>
           </div>
           <div class="flex gap-2 justify-center sm:justify-end items-center">
@@ -99,22 +101,7 @@ import Container from "@components/Container.astro";
           </div>
 
           <div class="order-1 sm:order-2 flex justify-center sm:justify-end">
-            <div class="flex flex-wrap gap-1 items-center justify-center">
-              {
-                SOCIALS.map((SOCIAL) => (
-                  <a
-                    href={SOCIAL.HREF}
-                    target="_blank"
-                    aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
-                    class="group size-8 sm:size-10 rounded-full p-2 items-center justify-center hover:bg-black/5 dark:hover:bg-white/20  blend"
-                  >
-                    <svg class="size-full fill-current group-hover:fill-black group-hover:dark:fill-white blend">
-                      <use href={`/social.svg#${SOCIAL.ICON}`} />
-                    </svg>
-                  </a>
-                ))
-              }
-            </div>
+            <!-- Social icons removed -->
           </div>
         </div>
       </Container>

@@ -1,5 +1,5 @@
 import './hoisted.O59icRPW.js';
-import './Gallery.astro_astro_type_script_index_0_lang.DWNpJo17.js';
+import './hoisted.jESYpfPB.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   const images = document.querySelectorAll(".gallery-image");
@@ -25,7 +25,9 @@ function checkImages() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         return response.blob();
-      }).then(() => console.log(`Image ${index + 1} is accessible`)).catch((e) => console.error(`Error with image ${index + 1}: ${e.message}`));
+      }).then(() => console.log(`Image ${index + 1} is accessible`)).catch(
+        (e) => console.error(`Error with image ${index + 1}: ${e.message}`)
+      );
     }
   });
 }

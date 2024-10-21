@@ -1,3 +1,5 @@
+import './hoisted.O59icRPW.js';
+
 function setupGallery() {
   const images = document.querySelectorAll(".gallery-image");
   const modal = document.getElementById("imageModal");

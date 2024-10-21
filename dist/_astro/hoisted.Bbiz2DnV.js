@@ -1,5 +1,5 @@
 import './hoisted.O59icRPW.js';
-import './Gallery.astro_astro_type_script_index_0_lang.DWNpJo17.js';
+import './hoisted.jESYpfPB.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   const images = document.querySelectorAll(".gallery-image");

@@ -1,80 +1,77 @@
 function changeTheme() {
-  const element = document.documentElement
-  const isDark = element.classList.contains("dark")
-  const newTheme = isDark ? "light" : "dark"
+  const element = document.documentElement;
+  const isDark = element.classList.contains("dark");
+  const newTheme = isDark ? "light" : "dark";
 
-  const css = document.createElement("style")
-  css.appendChild(
-    document.createTextNode(
-      `* {
-           -webkit-transition: none !important;
-           -moz-transition: none !important;
-           -o-transition: none !important;
-           -ms-transition: none !important;
-           transition: none !important;
-        }`,
-    ),
-  )
-  document.head.appendChild(css)
+  console.log("Changing theme to:", newTheme);
 
   if (newTheme === "dark") {
-    element.classList.add("dark")
+    element.classList.add("dark");
   } else {
-    element.classList.remove("dark")
+    element.classList.remove("dark");
   }
 
-  // Force a reflow
-  void window.getComputedStyle(css).opacity
-  document.head.removeChild(css)
-  localStorage.theme = newTheme
-
-  // Update button states
-  updateThemeButtonStates()
+  localStorage.theme = newTheme;
+  updateThemeButtonStates();
 }
 
 function updateThemeButtonStates() {
-  const isDark = document.documentElement.classList.contains("dark")
-  const headerThemeButton = document.getElementById("header-theme-button")
-  const drawerThemeButton = document.getElementById("drawer-theme-button")
+  const isDark = document.documentElement.classList.contains("dark");
+  const headerThemeButton = document.getElementById("header-theme-button");
+
+  console.log("Updating button states, isDark:", isDark);
 
   if (headerThemeButton) {
-    headerThemeButton.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme")
+    headerThemeButton.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
     headerThemeButton.innerHTML = isDark
-      ? '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>'
-      : '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>'
-  }
-
-  if (drawerThemeButton) {
-    drawerThemeButton.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme")
-    drawerThemeButton.innerHTML = isDark ? "Switch to light theme" : "Switch to dark theme"
+      ? '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>'
+      : '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>';
+  } else {
+    console.log("Header theme button not found");
   }
 }
 
 function initializeTheme() {
-  const storedTheme = localStorage.theme
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+  const storedTheme = localStorage.theme;
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  console.log("Initializing theme, storedTheme:", storedTheme, "prefersDark:", prefersDark);
 
   if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
-    document.documentElement.classList.add("dark")
+    document.documentElement.classList.add("dark");
   } else {
-    document.documentElement.classList.remove("dark")
+    document.documentElement.classList.remove("dark");
   }
 
-  localStorage.theme = document.documentElement.classList.contains("dark") ? "dark" : "light"
-  updateThemeButtonStates()
+  if (!storedTheme) {
+    localStorage.theme = prefersDark ? "dark" : "light";
+  }
+
+  console.log("Theme set to:", localStorage.theme);
+
+  updateThemeButtonStates();
 }
 
-function initializeThemeButtons() {
-  const headerThemeButton = document.getElementById("header-theme-button")
-  const drawerThemeButton = document.getElementById("drawer-theme-button")
-  headerThemeButton?.addEventListener("click", changeTheme)
-  drawerThemeButton?.addEventListener("click", changeTheme)
+function initializeThemeToggle() {
+  const headerThemeButton = document.getElementById("header-theme-button");
+  
+  if (headerThemeButton) {
+    headerThemeButton.addEventListener("click", changeTheme);
+    console.log("Header theme button initialized");
+  } else {
+    console.log("Header theme button not found");
+  }
+}
+
+function handleThemeToggle() {
+  initializeTheme();
+  initializeThemeToggle();
 }
 
 // Initialize theme on page load
-initializeTheme()
+document.addEventListener("DOMContentLoaded", handleThemeToggle);
 
-// Set up event listeners
-window.addEventListener("load", initializeThemeButtons)
-document.addEventListener("astro:after-swap", initializeTheme)
-document.addEventListener("astro:after-swap", initializeThemeButtons)
+// Set up event listeners for Astro page transitions
+document.addEventListener("astro:after-swap", handleThemeToggle);
+
+console.log("theme.js loaded");
