@@ -1,9 +1,9 @@
 function changeTheme() {
   const element = document.documentElement
-  const theme = element.classList.contains("dark") ? "light" : "dark"
+  const isDark = element.classList.contains("dark")
+  const newTheme = isDark ? "light" : "dark"
 
   const css = document.createElement("style")
-
   css.appendChild(
     document.createTextNode(
       `* {
@@ -17,7 +17,7 @@ function changeTheme() {
   )
   document.head.appendChild(css)
 
-  if (theme === "dark") {
+  if (newTheme === "dark") {
     element.classList.add("dark")
   } else {
     element.classList.remove("dark")
@@ -26,23 +26,42 @@ function changeTheme() {
   // Force a reflow
   void window.getComputedStyle(css).opacity
   document.head.removeChild(css)
-  localStorage.theme = theme
+  localStorage.theme = newTheme
+
+  // Update button states
+  updateThemeButtonStates()
 }
 
-function preloadTheme() {
-  const storedTheme = localStorage.theme
-  // Default to 'light' if no theme is stored
-  const theme = storedTheme === "dark" ? "dark" : "light"
+function updateThemeButtonStates() {
+  const isDark = document.documentElement.classList.contains("dark")
+  const headerThemeButton = document.getElementById("header-theme-button")
+  const drawerThemeButton = document.getElementById("drawer-theme-button")
 
-  const element = document.documentElement
-
-  if (theme === "dark") {
-    element.classList.add("dark")
-  } else {
-    element.classList.remove("dark")
+  if (headerThemeButton) {
+    headerThemeButton.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme")
+    headerThemeButton.innerHTML = isDark
+      ? '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>'
+      : '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>'
   }
 
-  localStorage.theme = theme
+  if (drawerThemeButton) {
+    drawerThemeButton.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme")
+    drawerThemeButton.innerHTML = isDark ? "Switch to light theme" : "Switch to dark theme"
+  }
+}
+
+function initializeTheme() {
+  const storedTheme = localStorage.theme
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+
+  if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
+    document.documentElement.classList.add("dark")
+  } else {
+    document.documentElement.classList.remove("dark")
+  }
+
+  localStorage.theme = document.documentElement.classList.contains("dark") ? "dark" : "light"
+  updateThemeButtonStates()
 }
 
 function initializeThemeButtons() {
@@ -52,21 +71,10 @@ function initializeThemeButtons() {
   drawerThemeButton?.addEventListener("click", changeTheme)
 }
 
-// Apply theme immediately, defaulting to light
-function applyDefaultTheme() {
-  const storedTheme = localStorage.theme
-  if (!storedTheme) {
-    localStorage.theme = 'light'
-    document.documentElement.classList.remove('dark')
-  } else {
-    preloadTheme()
-  }
-}
-
-// Apply default theme immediately
-applyDefaultTheme()
+// Initialize theme on page load
+initializeTheme()
 
 // Set up event listeners
 window.addEventListener("load", initializeThemeButtons)
+document.addEventListener("astro:after-swap", initializeTheme)
 document.addEventListener("astro:after-swap", initializeThemeButtons)
-document.addEventListener("astro:after-swap", applyDefaultTheme)
