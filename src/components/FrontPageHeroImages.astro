@@ -1,15 +1,21 @@
 ---
 import { Image } from "astro:assets";
-import drinks from "../../public/front-component/drinks.jpg";
-import cosmetics from "../../public/front-component/cosmetics.jpg";
-import technology from "../../public/front-component/technology.jpg";
-import people from "../../public/front-component/people.jpg";
-import animals from "../../public/front-component/animals.jpg";
-import stillLife from "../../public/front-component/still-life.jpg";
-import food from "../../public/front-component/food.jpg";
-import animals2 from "../../public/front-component/animals2.jpg";
+import drinks from "../../public/images/front-component/drinks.jpg";
+import cosmetics from "../../public/images/front-component/cosmetics.jpg";
+import technology from "../../public/images/front-component/technology.jpg";
+import people from "../../public/images/front-component/people.jpg";
+import animals from "../../public/images/front-component/animals.jpg";
+import stillLife from "../../public/images/front-component/still-life.jpg";
+import food from "../../public/images/front-component/food.jpg";
+import animals2 from "../../public/images/front-component/animals2.jpg";
 
-const images = [
+interface ImageData {
+  src: ImageMetadata;
+  alt: string;
+  href: string;
+}
+
+const images: ImageData[] = [
   { src: drinks, alt: "Drinks", href: "/drinks" },
   { src: cosmetics, alt: "Cosmetics", href: "/cosmetics" },
   { src: technology, alt: "Technology", href: "/technology" },
@@ -17,7 +23,7 @@ const images = [
   { src: animals, alt: "Animals", href: "/animals" },
   { src: stillLife, alt: "Still Life", href: "/still-life" },
   { src: food, alt: "Food", href: "/food" },
-  { src: animals2, alt: "Animals", href: "/animals" },
+  { src: animals2, alt: "Animals", href: "/animals" }
 ];
 ---
 
@@ -26,32 +32,30 @@ const images = [
     <div
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[18px]"
     >
-      {
-        images.map((image, index) => (
-          <a
-            href={image.href}
-            class="block overflow-hidden rounded-lg relative group aspect-square w-full h-full"
-          >
-            <div class="w-full h-full">
-              <Image
-                src={image.src}
-                alt={image.alt}
-                width={400}
-                height={400}
-                format="webp"
-                quality={80}
-                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                loading={index < 4 ? "eager" : "lazy"}
-              />
-            </div>
-            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <span class="text-white text-xl sm:text-2xl lg:text-3xl font-bold">
-                {image.alt}
-              </span>
-            </div>
-          </a>
-        ))
-      }
+      {images.map((image, index) => (
+        <a
+          href={image.href}
+          class="block overflow-hidden rounded-lg relative group aspect-square w-full h-full"
+        >
+          <div class="w-full h-full">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={400}
+              height={400}
+              format="webp"
+              quality={80}
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              loading={index < 4 ? "eager" : "lazy"}
+            />
+          </div>
+          <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="text-white text-xl sm:text-2xl lg:text-3xl font-bold">
+              {image.alt}
+            </span>
+          </div>
+        </a>
+      ))}
     </div>
   </div>
 </div>
