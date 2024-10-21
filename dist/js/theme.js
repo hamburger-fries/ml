@@ -52,10 +52,21 @@ function initializeThemeButtons() {
   drawerThemeButton?.addEventListener("click", changeTheme)
 }
 
-// Apply theme immediately
-preloadTheme()
+// Apply theme immediately, defaulting to light
+function applyDefaultTheme() {
+  const storedTheme = localStorage.theme
+  if (!storedTheme) {
+    localStorage.theme = 'light'
+    document.documentElement.classList.remove('dark')
+  } else {
+    preloadTheme()
+  }
+}
+
+// Apply default theme immediately
+applyDefaultTheme()
 
 // Set up event listeners
 window.addEventListener("load", initializeThemeButtons)
 document.addEventListener("astro:after-swap", initializeThemeButtons)
-document.addEventListener("astro:after-swap", preloadTheme)
+document.addEventListener("astro:after-swap", applyDefaultTheme)

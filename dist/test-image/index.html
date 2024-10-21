@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Test Image</title></head> <body> <h1>Test Image Page</h1> <p>Attempting to load image from: /images/front-component/drinks.jpg</p> <img src="/images/front-component/drinks.jpg" alt="Drinks" width="400" height="400"> <script>(function(){const imagePath = "/images/front-component/drinks.jpg";
+
+        console.log('Client-side: Test Image page script executed');
+        console.log(`Client-side: Attempting to load image from: ${imagePath}`);
+        const img = document.querySelector('img');
+        if (img) {
+            img.addEventListener('load', () => console.log('Client-side: Image loaded successfully'));
+            img.addEventListener('error', (e) => {
+                console.error('Client-side: Error loading image:', e);
+                console.error('Client-side: Image src:', img.src);
+            });
+        } else {
+            console.error('Client-side: Image element not found');
+        }
+    })();</script> </body> </html>

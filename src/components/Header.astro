@@ -1,131 +1,145 @@
 ---
-import { LINKS } from "../consts"
-import { cn } from "../lib/utils"
-import Container from "./Container.astro"
+import { LINKS } from "../consts";
+import { cn } from "../lib/utils";
+import Container from "./Container.astro";
 
-const { pathname } = Astro.url
-const subpath = pathname.match(/[^/]+/g)
+const { pathname } = Astro.url;
+const subpath = pathname.match(/[^/]+/g);
 
-console.log("All LINKS:", LINKS);
-const filteredLinks = LINKS.filter(LINK => LINK.TEXT !== "About" && LINK.TEXT !== "Contact");
-console.log("Filtered LINKS:", filteredLinks);
+const filteredLinks = LINKS.filter(
+  (LINK) => LINK.TEXT !== "About" && LINK.TEXT !== "Contact"
+);
+const allLinks = [
+  ...filteredLinks,
+  { HREF: "/about", TEXT: "About" },
+  { HREF: "/contact", TEXT: "Contact" },
+];
 ---
 
 <header id="header" class="fixed top-0 w-full z-50 bg-white dark:bg-black">
   <Container size="xl">
     <div class="relative py-2 sm:py-4">
       <div class="flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity duration-300 ease-in-out">
-          <img src="/images/logo.png" alt="Mark Lata Logo" class="h-6 w-auto sm:h-8 block dark:hidden" />
-          <img src="/images/logo-dark.png" alt="Mark Lata Logo" class="h-6 w-auto sm:h-8 hidden dark:block" />
+        <a
+          href="/"
+          class="flex items-center gap-2 hover:opacity-80 transition-opacity duration-300 ease-in-out"
+        >
+          <img
+            src="/images/logo.png"
+            alt="Mark Lata Logo"
+            class="h-6 w-auto sm:h-8 block dark:hidden"
+          />
+          <img
+            src="/images/logo-dark.png"
+            alt="Mark Lata Logo"
+            class="h-6 w-auto sm:h-8 hidden dark:block"
+          />
         </a>
 
         <nav class="hidden md:flex items-center justify-between gap-4 text-base">
-          {filteredLinks.map((LINK) => (
-            <a 
-              href={LINK.HREF} 
-              class={cn(
-                "px-3 py-2 rounded-md transition-colors duration-300 ease-in-out",
-                pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF 
-                  ? "bg-black dark:bg-white text-white dark:text-black" 
-                  : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white"
-              )}
-            >
-              {LINK.TEXT}
-            </a>
-          ))}
+          {
+            allLinks.map((LINK) => (
+              <a
+                href={LINK.HREF}
+                class={cn(
+                  "px-3 py-2 rounded-md transition-colors duration-300 ease-in-out",
+                  pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF
+                    ? "bg-black dark:bg-white text-white dark:text-black"
+                    : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white"
+                )}
+              >
+                {LINK.TEXT}
+              </a>
+            ))
+          }
         </nav>
 
         <div class="flex items-center gap-4">
-          <button id="header-theme-button" aria-label="Toggle light and dark theme" class="flex w-8 h-8 sm:w-10 sm:h-10 rounded-full p-2 items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 block dark:hidden">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+          <button
+            id="header-theme-button"
+            aria-label="Toggle light and dark theme"
+            class="flex w-8 h-8 sm:w-10 sm:h-10 rounded-full p-2 items-center justify-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 block dark:hidden"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+              />
             </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden dark:block">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 hidden dark:block"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
+              />
             </svg>
           </button>
 
-          <a href="/about" class="flex items-center justify-center w-14 h-[22px]">
-            <img src="/images/icons/about-light.svg" alt="About" class="w-full h-full object-contain block dark:hidden" />
-            <img src="/images/icons/about-dark.svg" alt="About" class="w-full h-full object-contain hidden dark:block" />
-          </a>
-
-          <a href="/contact" class="flex items-center justify-center w-[75px] h-[22px]">
-            <img src="/images/icons/contact-light.svg" alt="Contact" class="w-full h-full object-contain block dark:hidden" />
-            <img src="/images/icons/contact-dark.svg" alt="Contact" class="w-full h-full object-contain hidden dark:block" />
-          </a>
-
-          <button id="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          <button
+            id="mobile-menu-toggle"
+            aria-label="Toggle mobile menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            class="md:hidden flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
             </svg>
           </button>
         </div>
       </div>
 
       <!-- Mobile Menu -->
-      <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white dark:bg-black border-t border-black/10 dark:border-white/25" aria-labelledby="mobile-menu-toggle" role="navigation">
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden absolute top-full left-0 right-0 bg-white dark:bg-black border-t border-black/10 dark:border-white/25"
+        aria-labelledby="mobile-menu-toggle"
+        role="navigation"
+      >
         <nav class="flex flex-wrap justify-center py-2">
-          {LINKS.map((LINK) => (
-            <a 
-              href={LINK.HREF} 
-              class={cn(
-                "px-3 py-2 transition-colors duration-300 ease-in-out",
-                pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF 
-                  ? "bg-black dark:bg-white text-white dark:text-black" 
-                  : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white"
-              )}
-            >
-              {LINK.TEXT === "About" ? (
-                <img src="/images/icons/about-light.svg" alt="About" class="w-14 h-[22px] block dark:hidden" />
-                <img src="/images/icons/about-dark.svg" alt="About" class="w-14 h-[22px] hidden dark:block" />
-              ) : LINK.TEXT === "Contact" ? (
-                <img src="/images/icons/contact-light.svg" alt="Contact" class="w-[75px] h-[22px] block dark:hidden" />
-                <img src="/images/icons/contact-dark.svg" alt="Contact" class="w-[75px] h-[22px] hidden dark:block" />
-              ) : (
-                LINK.TEXT
-              )}
-            </a>
-          ))}
+          {
+            allLinks.map((LINK) => (
+              <a
+                href={LINK.HREF}
+                class={cn(
+                  "px-3 py-2 transition-colors duration-300 ease-in-out",
+                  pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF
+                    ? "bg-black dark:bg-white text-white dark:text-black"
+                    : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white"
+                )}
+              >
+                {LINK.TEXT}
+              </a>
+            ))
+          }
         </nav>
       </div>
     </div>
   </Container>
 </header>
-
-<script>
-  function setupThemeToggle() {
-    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    mobileMenuToggle?.addEventListener('click', () => {
-      const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
-      mobileMenuToggle.setAttribute('aria-expanded', (!isExpanded).toString());
-      mobileMenu?.classList.toggle('hidden');
-    });
-
-    const themeToggleButton = document.getElementById('header-theme-button');
-    
-    function setTheme(theme: 'light' | 'dark') {
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      }
-    }
-
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    setTheme(savedTheme || 'light');
-
-    themeToggleButton?.addEventListener('click', () => {
-      const isDark = document.documentElement.classList.contains('dark');
-      setTheme(isDark ? 'light' : 'dark');
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', setupThemeToggle);
-  document.addEventListener('astro:after-swap', setupThemeToggle);
-</script>

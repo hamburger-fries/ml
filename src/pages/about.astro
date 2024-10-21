@@ -1,0 +1,37 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Container from "../components/Container.astro";
+
+const title = "About Mark Lata";
+const description = "Learn more about Mark Lata and his photography work.";
+---
+
+<PageLayout title={title} description={description}>
+  <Container size="md">
+    <h1 class="text-4xl font-bold mb-6">About Mark Lata</h1>
+    <div class="prose prose-lg dark:prose-invert">
+      <p>
+        Mark Lata is a renowned photographer specializing in various fields including drinks, cosmetics, technology, people, animals, still-life, and food photography.
+      </p>
+      <p>
+        With years of experience and a keen eye for detail, Mark has worked with numerous clients across different industries, capturing stunning images that tell compelling stories.
+      </p>
+      <p>
+        His work is characterized by its creativity, technical excellence, and ability to showcase subjects in their best light. Whether it's a product shot, a portrait, or a complex still-life composition, Mark brings a unique perspective to every project.
+      </p>
+      <h2 class="text-2xl font-semibold mt-8 mb-4">Areas of Expertise</h2>
+      <ul>
+        <li>Drinks Photography</li>
+        <li>Cosmetics and Beauty Product Photography</li>
+        <li>Technology and Gadget Photography</li>
+        <li>Portrait and People Photography</li>
+        <li>Animal and Pet Photography</li>
+        <li>Still-Life Photography</li>
+        <li>Food and Culinary Photography</li>
+      </ul>
+      <p class="mt-6">
+        For inquiries about collaborations or to discuss a project, please visit the <a href="/contact" class="text-blue-600 dark:text-blue-400 hover:underline">Contact page</a>.
+      </p>
+    </div>
+  </Container>
+</PageLayout>

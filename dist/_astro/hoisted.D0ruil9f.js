@@ -1,4 +1,4 @@
-import './hoisted.BkMUZmKb.js';
+import './hoisted.O59icRPW.js';
 import './Gallery.astro_astro_type_script_index_0_lang.DWNpJo17.js';
 
 document.addEventListener("DOMContentLoaded", () => {
