@@ -1,6 +1,6 @@
 ---
-import PageLayout from "@layouts/PageLayout.astro";
-import Gallery from "@components/Gallery.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+import Gallery from "../components/Gallery.astro";
 
 interface Image {
   imgUrl: string;
@@ -8,45 +8,51 @@ interface Image {
 }
 
 const imageFiles: string[] = [
-  "Apple_Watch_ip68_.jpg",
-  "b&o_A1_.jpg",
-  "b&o_beach_2a_.jpg",
-  "b&o_blue_.jpg",
-  "B&O_ear_.jpg",
-  "b&o_H2_olive_.jpg",
-  "b&o_H8_v2_.jpg",
-  "corningware_crab_.jpg",
-  "Corningware_pig_.jpg",
-  "Danze_Kitchen_spring_ip_3_.jpg",
-  "Danze_shower_head_ip_3_.jpg",
-  "environment_a.jpg",
-  "environment_b.jpg",
-  "environment_e.jpg",
-  "environment_f.jpg",
-  "environment_g.jpg",
-  "environment_h.jpg",
-  "Feather-Phone_.jpg",
-  "giro_ad-PPP_.jpg",
-  "giro_breathe__2.jpg",
-  "giro_contrail_.jpg",
-  "Giro_Runway_final.jpg",
-  "Giro_Space_ad__2.jpg",
-  "Grohe_shower_head_green_.jpg",
-  "Grohe_showerheads__2.jpg",
+  "a-1-Apple_Watch_ip68_.jpg",
+  "a-1-TECH_50_AA_.jpg",
+  "a-2-olo_blue__2.jpg",
+  "a-2-rolo_green_.jpg",
+  "a-2-rolo_pink_.jpg",
+  "a-2-rolo_silver__2.jpg",
+  "a-TECH_50_.jpg",
+  "a-TECH_50_B_.jpg",
+  "a-TECH_51_.jpg",
+  "b-b&o_A1_.jpg",
+  "b-b&o_beach_2a_.jpg",
+  "b-b&o_blue_.jpg",
+  "b-B&O_ear_.jpg",
+  "b-b&o_H2_olive_.jpg",
+  "b-b&o_H8_v2_.jpg",
+  "c-corningware_crab_.jpg",
+  "c-Corningware_pig_.jpg",
+  "d-2-Grohe_shower_head_green_.jpg",
+  "d-2-Grohe_showerheads__2.jpg",
+  "d-Danze_Kitchen_spring_ip_3_.jpg",
+  "d-Danze_shower_head_ip_3_.jpg",
+  "d-tech_58_.jpg",
+  "e-1-environment_f.jpg",
+  "e-1-environment_g.jpg",
+  "e-1-environment_h.jpg",
+  "e-environment_a.jpg",
+  "e-environment_b.jpg",
+  "e-environment_e.jpg",
+  "e-Symantek_sample_D_.jpg",
+  "f-Feather-Phone_.jpg",
+  "f-Samsung_skies_.jpg",
+  "g-.jpg",
+  "g-giro_ad-PPP_.jpg",
+  "g-giro_contrail_.jpg",
+  "g-Giro_Runway_final.jpg",
+  "g-Giro_Space_ad__2.jpg",
+  "h-Nike_blue_shoe_cu_ip2_.jpg",
+  "h-Nike_green_shoe_.jpg",
+  "h-Nike_magenta_shoe_cu_.jpg",
+  "h-Nike_white_shoe_.jpg",
   "Honda_Shadow_final_.jpg",
   "Mini_ad_boxing_glove_.jpg",
-  "Nike_blue_shoe_cu_ip2_.jpg",
-  "Nike_green_shoe_.jpg",
-  "Nike_magenta_shoe_cu_.jpg",
-  "Nike_white_shoe_.jpg",
   "P_van_cleef_2_.jpg",
   "P_van_cleef_pea_pod_.jpg",
   "Ricoh_Theta_.jpg",
-  "rolo_blue__2.jpg",
-  "rolo_green_.jpg",
-  "rolo_pink_.jpg",
-  "rolo_silver__2.jpg",
-  "Samsung_skies_.jpg",
   "SimonG_Engagement_A_.jpg",
   "SimonG_Fashion_2_ip_5_.jpg",
   "SimonG_Set_A_ip_6_.jpg",
@@ -54,7 +60,6 @@ const imageFiles: string[] = [
   "stienway_ad_Sml_.jpg",
   "stienway_bridge_ad_Sml_.jpg",
   "STUDIO_70682_White_ip12_.jpg",
-  "Symantek_sample_D_.jpg",
   "tech_12_.jpg",
   "TECH_13_.jpg",
   "TECH_29_.jpg",
@@ -62,12 +67,7 @@ const imageFiles: string[] = [
   "tech_39_.jpg",
   "tech_40_.jpg",
   "TECH_42_.jpg",
-  "TECH_50_.jpg",
-  "TECH_50_AA_.jpg",
-  "TECH_50_B_.jpg",
-  "TECH_51_.jpg",
   "tech_54_.jpg",
-  "tech_58_.jpg",
   "Tech_62_.jpg",
   "Tech_63_.jpg"
 ];
@@ -86,43 +86,3 @@ const images: Image[] = imageFiles.map(file => ({
     <Gallery images={images} />
   </div>
 </PageLayout>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const images = document.querySelectorAll('.gallery-image');
-    images.forEach((img, index) => {
-      if (img instanceof HTMLImageElement) {
-        img.addEventListener('error', function() {
-          console.error(`Failed to load image ${index + 1}: ${this.src}`);
-          // Instead of hiding the image, let's show an error placeholder
-          this.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-size%3D%2214%22%20fill%3D%22%23aaa%22%3EError%3C%2Ftext%3E%3C%2Fsvg%3E';
-          this.alt = 'Error loading image';
-        });
-        img.addEventListener('load', function() {
-          console.log(`Successfully loaded image ${index + 1}: ${this.src}`);
-        });
-      }
-    });
-  });
-
-  // Function to check if images are loading correctly
-  function checkImages() {
-    const images = document.querySelectorAll('.gallery-image');
-    images.forEach((img, index) => {
-      if (img instanceof HTMLImageElement) {
-        fetch(img.src)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.blob();
-          })
-          .then(() => console.log(`Image ${index + 1} is accessible`))
-          .catch(e => console.error(`Error with image ${index + 1}: ${e.message}`));
-      }
-    });
-  }
-
-  // Run the check after a short delay to ensure all images have been processed
-  setTimeout(checkImages, 2000);
-</script>
