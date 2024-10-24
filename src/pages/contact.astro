@@ -3,76 +3,48 @@ import PageLayout from "../layouts/PageLayout.astro";
 ---
 
 <PageLayout title="Contact">
-  <div class="contact-content w-full">
-    <h1 class="text-black dark:text-white">Contact</h1>
-    <div class="contact-item">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="icon-email"
+  <main class="flex-0 flex items-center">
+    <div class="w-full max-w-2xl mx-auto px-4 my-[30px]">
+      <h1
+        class="text-3xl sm:text-4xl font-bold mb-8 text-black dark:text-white"
       >
-        <path
-          d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-        ></path>
-        <polyline points="22,6 12,13 2,6"></polyline>
-      </svg>
-      <span class="text-black dark:text-white">Email Address: studio@marklaita.com</span>
+        Contact
+      </h1>
+
+      <div class="flex items-center gap-3 group">
+        <div
+          class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-black/5 dark:bg-white/10 group-hover:bg-black/10 dark:group-hover:bg-white/20 transition-colors duration-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-black dark:text-white"
+          >
+            <path
+              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            ></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <div class="text-sm text-black/60 dark:text-white/60">
+            Email Address
+          </div>
+          <a
+            href="mailto:studio@marklaita.com"
+            class="text-base sm:text-lg text-black dark:text-white hover:text-black/80 dark:hover:text-white/80 transition-colors duration-300"
+          >
+            studio@marklaita.com
+          </a>
+        </div>
+      </div>
     </div>
-    <!-- <div class="contact-item">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="icon-address"
-      >
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-        <circle cx="12" cy="10" r="3"></circle>
-      </svg>
-      <span class="text-black dark:text-white">Mailing Address: 2403 Main Street, Santa Monica, CA 90405</span>
-    </div> -->
-  </div>
+  </main>
 </PageLayout>
-
-<style>
-  .contact-content {
-    padding-top: 100px; /* Increased padding to account for fixed header */
-    max-width: 600px;
-    margin: 0 auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .contact-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-
-  .icon-email,
-  .icon-address {
-    margin-right: 10px;
-    @apply text-black dark:text-white;
-  }
-
-  span {
-    font-size: 1rem;
-  }
-</style>

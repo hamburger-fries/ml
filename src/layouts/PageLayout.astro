@@ -17,9 +17,7 @@ const { title, description } = Astro.props;
   <body class="flex flex-col min-h-screen">
     <Header />
     <Drawer />
-    <main class="flex pt-[30px]">
-      <slot />
-    </main>
+    <slot />
     <Footer />
     <script>
       // Apply the saved theme on initial page load

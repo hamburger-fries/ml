@@ -16,7 +16,7 @@ const allLinks = [
 ];
 ---
 
-<header id="header" class="fixed top-0 w-full z-50 bg-white dark:bg-black">
+<header id="header" class="fixed top-0 w-full z-[100] bg-white dark:bg-black">
   <Container size="xl">
     <div class="relative py-2 sm:py-4">
       <div class="flex items-center justify-between">
@@ -58,7 +58,7 @@ const allLinks = [
           <button
             id="header-theme-button"
             aria-label="Toggle light and dark theme"
-            class="flex w-8 h-8 sm:w-10 sm:h-10 rounded-full p-2 items-center justify-center"
+            class="flex w-8 h-8 sm:w-10 sm:h-10 rounded-full p-2 items-center justify-center hover:bg-black/5 dark:hover:bg-white/20 transition-colors duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +95,7 @@ const allLinks = [
             aria-label="Toggle mobile menu"
             aria-expanded="false"
             aria-controls="mobile-menu"
-            class="md:hidden flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10"
+            class="md:hidden flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 hover:bg-black/5 dark:hover:bg-white/20 rounded-md transition-colors duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -118,17 +118,17 @@ const allLinks = [
       <!-- Mobile Menu -->
       <div
         id="mobile-menu"
-        class="hidden md:hidden absolute top-full left-0 right-0 bg-white dark:bg-black border-t border-black/10 dark:border-white/25"
+        class="hidden md:hidden absolute top-full left-0 right-0 bg-white dark:bg-black border-t border-black/10 dark:border-white/25 transform transition-[opacity,transform] duration-300 ease-in-out opacity-0"
         aria-labelledby="mobile-menu-toggle"
         role="navigation"
       >
-        <nav class="flex flex-wrap justify-center py-2">
+        <nav class="flex flex-col py-2">
           {
             allLinks.map((LINK) => (
               <a
                 href={LINK.HREF}
                 class={cn(
-                  "px-3 py-2 transition-colors duration-300 ease-in-out",
+                  "px-4 py-2 transition-colors duration-300 ease-in-out",
                   pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF
                     ? "bg-black dark:bg-white text-white dark:text-black"
                     : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white"
@@ -145,16 +145,5 @@ const allLinks = [
 </header>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    if (mobileMenuToggle && mobileMenu) {
-      mobileMenuToggle.addEventListener('click', () => {
-        const expanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true' || false;
-        mobileMenuToggle.setAttribute('aria-expanded', (!expanded).toString());
-        mobileMenu.classList.toggle('hidden');
-      });
-    }
-  });
+  // Remove the old script since we're using mobileMenu.js
 </script>
