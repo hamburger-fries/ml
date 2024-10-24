@@ -3,7 +3,7 @@ import PageLayout from "../layouts/PageLayout.astro";
 ---
 
 <PageLayout title="Contact">
-  <div class="contact-content">
+  <div class="contact-content w-full">
     <h1 class="text-black dark:text-white">Contact</h1>
     <div class="contact-item">
       <svg
@@ -25,7 +25,7 @@ import PageLayout from "../layouts/PageLayout.astro";
       </svg>
       <span class="text-black dark:text-white">Email Address: studio@marklaita.com</span>
     </div>
-    <div class="contact-item">
+    <!-- <div class="contact-item">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -42,21 +42,22 @@ import PageLayout from "../layouts/PageLayout.astro";
         <circle cx="12" cy="10" r="3"></circle>
       </svg>
       <span class="text-black dark:text-white">Mailing Address: 2403 Main Street, Santa Monica, CA 90405</span>
-    </div>
+    </div> -->
   </div>
 </PageLayout>
 
 <style>
   .contact-content {
-    padding-top: 30px;
+    padding-top: 100px; /* Increased padding to account for fixed header */
     max-width: 600px;
     margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    margin-top: 30px;
   }
 
   .contact-item {
