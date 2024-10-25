@@ -1,6 +1,6 @@
 ---
-import PageLayout from "@layouts/PageLayout.astro";
-import Gallery from "@components/Gallery.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+import Gallery from "../components/Gallery.astro";
 
 interface Image {
   imgUrl: string;
@@ -8,18 +8,18 @@ interface Image {
 }
 
 const imageFiles = [
-  "07__BCounter_14_lip_gloss__.jpg",
-  "Amore_Pacific_.jpg",
-  "bc_d_.jpg",
-  "BC_Dew_Skin_Test_.jpg",
-  "BC_Tint_Skin__2.jpg",
-  "BCounter_10_18818_ip6_.jpg",
-  "BCounter_10_Baby_Box_ip2_.jpg",
-  "BCounter_tint_skin_single_ip20_.jpg",
-  "Beauty_Counter_492363_ip2_.jpg",
-  "Blue_mu_crumbles_.jpg",
-  "broken_pastels_as_face_.jpg",
-  "Bubble_globe_.jpg",
+  "y-07__BCounter_14_lip_gloss__.jpg",
+  "y-Amore_Pacific_.jpg",
+  "y-bc_d_.jpg",
+  "y-BC_Dew_Skin_Test_.jpg",
+  "y-BC_Tint_Skin__2.jpg",
+  "y-BCounter_10_18818_ip6_.jpg",
+  "y-BCounter_10_Baby_Box_ip2_.jpg",
+  "y-BCounter_tint_skin_single_ip20_.jpg",
+  "y-Beauty_Counter_492363_ip2_.jpg",
+  "y-Blue_mu_crumbles_.jpg",
+  "y-broken_pastels_as_face_.jpg",
+  "y-Bubble_globe_.jpg",
   "Bulgari_bottle_.jpg",
   "Clinique_ChubbySticks_.jpg",
   "Clinique_lipsticks_w_berries_.jpg",
@@ -101,10 +101,7 @@ const imageFiles = [
 
 const images: Image[] = imageFiles.map(file => ({
   imgUrl: `/images/photos/cosmetics/${file}`,
-  alt: file.replace(/\.(jpg|jpeg|png|gif)$/i, '')
-           .replace(/[_-]/g, ' ')
-           .replace(/\s+/g, ' ')
-           .trim()
+  alt: file.replace(/\.(jpg|jpeg|png|gif)$/i, '').replace(/[_-]/g, ' ').replace(/\s+/g, ' ').trim()
 }));
 ---
 
@@ -115,41 +112,36 @@ const images: Image[] = imageFiles.map(file => ({
 </PageLayout>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const images = document.querySelectorAll('.gallery-image');
-    images.forEach((img, index) => {
-      if (img instanceof HTMLImageElement) {
-        img.addEventListener('error', function() {
-          console.error(`Failed to load image ${index + 1}: ${this.src}`);
-          // Instead of hiding the image, let's show an error placeholder
-          this.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-size%3D%2214%22%20fill%3D%22%23aaa%22%3EError%3C%2Ftext%3E%3C%2Fsvg%3E';
-          this.alt = 'Error loading image';
-        });
-        img.addEventListener('load', function() {
-          console.log(`Successfully loaded image ${index + 1}: ${this.src}`);
-        });
-      }
-    });
+document.addEventListener('DOMContentLoaded', () => {
+  const images = document.querySelectorAll('.gallery-image');
+  images.forEach((img, index) => {
+    if (img instanceof HTMLImageElement) {
+      img.addEventListener('error', function() {
+        console.error(`Failed to load image ${index + 1}: ${this.src}`);
+        this.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-size%3D%2214%22%20fill%3D%22%23aaa%22%3EError%3C%2Ftext%3E%3C%2Fsvg%3E';
+        this.alt = 'Error loading image';
+      });
+      img.addEventListener('load', function() {
+        console.log(`Successfully loaded image ${index + 1}: ${this.src}`);
+      });
+    }
   });
+});
 
-  // Function to check if images are loading correctly
-  function checkImages() {
-    const images = document.querySelectorAll('.gallery-image');
-    images.forEach((img, index) => {
-      if (img instanceof HTMLImageElement) {
-        fetch(img.src)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.blob();
-          })
-          .then(() => console.log(`Image ${index + 1} is accessible`))
-          .catch(e => console.error(`Error with image ${index + 1}: ${e.message}`));
-      }
-    });
-  }
+function checkImages() {
+  const images = document.querySelectorAll('.gallery-image');
+  images.forEach((img, index) => {
+    if (img instanceof HTMLImageElement) {
+      fetch(img.src)
+        .then(response => {
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          return response.blob();
+        })
+        .then(() => console.log(`Image ${index + 1} is accessible`))
+        .catch(e => console.error(`Error with image ${index + 1}: ${e.message}`));
+    }
+  });
+}
 
-  // Run the check after a short delay to ensure all images have been processed
-  setTimeout(checkImages, 2000);
+setTimeout(checkImages, 2000);
 </script>

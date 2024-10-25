@@ -8,23 +8,18 @@ interface Image {
 }
 
 const imageFiles: string[] = [
-  "a-Deleon_A.jpg",
-  "a-Deleon_chair.jpg",
-  "a-Deleon_Ocean.jpg",
-  "a-Deleon_Pool_ip4_her.jpg",
-  "a-Deleon_test_B.JPG",
-  "a-Deleon_test_C.jpg",
-  "a-Deleon_test_D.jpg",
+  "aa-Deleon_test_B.JPG",
+  "ab-Deleon_test_C.jpg",
+  "ac-Deleon_A.jpg",
+  "ad-Deleon_chair.jpg",
+  "ae-Deleon_Ocean.jpg",
+  "af-Deleon_Pool_ip4_her.jpg",
+  "ag-Deleon_test_D.jpg",
   "b-archive_ad_1_revised_.jpg",
   "b-archive_ad_2_revised_.jpg",
   "b-archive_ad_3_revised_.jpg",
   "b-archive_ad_4_revised_.jpg",
   "b-bertoia_chair_.jpg",
-  "BiancaSilva_1_.jpg",
-  "BiancaSilva_3_.jpg",
-  "c-B&O_Claudine_.jpg",
-  "c-Claudine_4_.jpg",
-  "c-Claudine_B&O_2_.jpg",
   "d-2-Ken_Watanabe__3.jpg",
   "d-Andrew_A__3.jpg",
   "d-Celestine_w_hat_&_scarf_.jpg",
@@ -34,8 +29,6 @@ const imageFiles: string[] = [
   "d-Mareeya_8_gray_ip22_.jpg",
   "d-Nick__3.jpg",
   "d-Nina_b&w__3.jpg",
-  "e-Epson_Painted_Lady_.jpg",
-  "e-Franziska_hair_.jpg",
   "f-HydrapakBiker__3.jpg",
   "f-HydrapakSkier__3.jpg",
   "f-HydrapakTravis__3.jpg",
@@ -47,16 +40,30 @@ const imageFiles: string[] = [
   "g-3-Sara_w_dog_.jpg",
   "g-5-gigli_wind_.jpg",
   "g-5-K9V6781_.jpg",
+  "g-n-1-Tony_Shahloub_polaroid_.jpg",
+  "g-n-1-Tony_Shalhoub_portrait_B&W_.jpg",
+  "g-n-2-Tova_hat_8x10_.jpg",
+  "g-n-2-Tova_hood_1_.jpg",
+  "g-n-3-Ty_w_hat_.jpg",
+  "g-n-3-Veronica_6_.jpg",
+  "g-n-3-Victoria_ip6_.jpg",
   "h-callalily_Jamie__3.jpg",
   "h-dying_flower__4.jpg",
   "h-eye-butterfly_print_.jpg",
   "h-Feather_Katie_.jpg",
   "h-ialeaf_Jamie_.jpg",
-  "h-z-bullfighter_bullrider_.jpg",
+  "ha-BiancaSilva_1_.jpg",
+  "ha-BiancaSilva_3_.jpg",
+  "ha-c-B&O_Claudine_.jpg",
+  "ha-c-Claudine_4_.jpg",
+  "ha-c-Claudine_B&O_2_.jpg",
+  "ha-z-bullfighter_bullrider_.jpg",
   "i-Jacki_w_palm_.jpg",
   "i-Jacki_w_tree_fern_.jpg",
   "ia-Jacki_in_pool_1_.jpg",
   "J_in_car_montage_B_print_.jpg",
+  "k-Epson_Painted_Lady_.jpg",
+  "k-Franziska_hair_.jpg",
   "k-Jade_Sitting_ip_10_.jpg",
   "k-Julia_ip_5_.jpg",
   "k-Katie_Laughing_.jpg",
@@ -70,15 +77,8 @@ const imageFiles: string[] = [
   "m-The_Knick_11a_.jpg",
   "m-The_Knick_Print_.jpg",
   "Melody_blue_.jpg",
-  "n-1-Tony_Shahloub_polaroid_.jpg",
-  "n-1-Tony_Shalhoub_portrait_B&W_.jpg",
   "n-2-Tova_black_sand_1_.jpg",
-  "n-2-Tova_hat_8x10_.jpg",
-  "n-2-Tova_hood_1_.jpg",
-  "n-3-Ty_w_hat_.jpg",
-  "n-3-Veronica_6_.jpg",
   "n-3-Vicki_w_monstera_leaf_ip2_.jpg",
-  "n-3-Victoria_ip6_.jpg",
   "o-Nike_test_blue-green-yellow_.jpg",
   "o-Nike_test-Morgan_ip2_.jpg",
   "o-Nike_white_ip11_DD_.jpg",
@@ -119,7 +119,6 @@ const images: Image[] = imageFiles.map((file) => ({
       if (img instanceof HTMLImageElement) {
         img.addEventListener("error", function () {
           console.error(`Failed to load image ${index + 1}: ${this.src}`);
-          // Instead of hiding the image, let's show an error placeholder
           this.src =
             "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23eee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-size%3D%2214%22%20fill%3D%22%23aaa%22%3EError%3C%2Ftext%3E%3C%2Fsvg%3E";
           this.alt = "Error loading image";
@@ -131,7 +130,6 @@ const images: Image[] = imageFiles.map((file) => ({
     });
   });
 
-  // Function to check if images are loading correctly
   function checkImages() {
     const images = document.querySelectorAll(".gallery-image");
     images.forEach((img, index) => {
@@ -151,6 +149,5 @@ const images: Image[] = imageFiles.map((file) => ({
     });
   }
 
-  // Run the check after a short delay to ensure all images have been processed
   setTimeout(checkImages, 2000);
 </script>
